@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 use App\Category;
 class Product extends Model
 {
-  protected $table = 'products';
-  protected $guarded = [] ;
+    protected $table = 'products';
+    protected $guarded = [] ;
 
 
 
 
 
-  public function categoryName(){
-      return $this->belongsTo('App\Category','category');
-  }
+    public function categoryName(){
+        return $this->belongsTo('App\Category','category');
+    }
 
 
     public function options($parentid){
@@ -30,24 +30,15 @@ class Product extends Model
         $parentids =json_decode($parentidsJSON);
         $additionaloptions = [];
 
-      foreach ($parentids as $parent){
-         $optiondata = AdditionalOption::where('id','=',$parent)->get();
-          $additionaloptions[$parent] =  $optiondata  ;
+        foreach ($parentids as $parent){
+            $optiondata = AdditionalOption::where('id','=',$parent)->get();
+            $additionaloptions[$parent] =  $optiondata  ;
 
-      }
-    return $additionaloptions ;
+        }
+        return $additionaloptions ;
     }
-//
-//    public function additionaloptionsselected($parentidsJSON){
-//
-//        $parentids =json_decode($parentidsJSON);
-//        foreach($parentids as $id){
-//
-//        }
-//    }
 
 
-//    Get Additional options childs
     public function additionaloption($id){
 
         $additionaloptions = AdditionalOption::where('parent_id','=',$id)->get();

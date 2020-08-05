@@ -19,10 +19,10 @@
                                 </div>
 
                                 @foreach($productimages as $image)
-                                <div class="tab-pane " id="pic-{{$image->id}}" style="height:409px;  background: url('/storage/uploads/thumbnail/products/medium/{{$image->name}}') no-repeat;
-                                    background-size: cover;background-position: center center !important;">
-{{--                                    <img src="/storage/uploads/thumbnail/products/medium/{{$image->name}}" alt="image"/>--}}
-</div>
+                                    <div class="tab-pane " id="pic-{{$image->id}}" style="height:409px;  background: url('/storage/uploads/thumbnail/products/medium/{{$image->name}}') no-repeat;
+                                        background-size: cover;background-position: center center !important;">
+                                        {{--                                    <img src="/storage/uploads/thumbnail/products/medium/{{$image->name}}" alt="image"/>--}}
+                                    </div>
                                 @endforeach
                             </div>
                             <ul class="preview-thumbnail nav nav-tabs">
@@ -31,11 +31,11 @@
                                             background-size: cover;background-position: center center !important;">
                                         </div>   </a></li>
                                 @foreach($productimages as $image)
-                                <li style="margin-right: 0% !important;"><a data-target="#pic-{{$image->id}}" data-toggle="tab" >
-                                        <div class="tab-pane " id="pic-{{$image->id}}" style="height:50px;  background: url('/storage/uploads/thumbnail/products/small/{{$image->name}}') no-repeat;
-                                            background-size: cover;background-position: center center !important;">
-{{--                                        <img src="/storage/uploads/thumbnail/products/small/{{$image->name}}" alt="image"/>--}}
-                                        </div>   </a></li>
+                                    <li style="margin-right: 0% !important;"><a data-target="#pic-{{$image->id}}" data-toggle="tab" >
+                                            <div class="tab-pane " id="pic-{{$image->id}}" style="height:50px;  background: url('/storage/uploads/thumbnail/products/small/{{$image->name}}') no-repeat;
+                                                background-size: cover;background-position: center center !important;">
+                                                {{--                                        <img src="/storage/uploads/thumbnail/products/small/{{$image->name}}" alt="image"/>--}}
+                                            </div>   </a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -64,70 +64,70 @@
                     </div>
 
 
-               <div class="row row-sm  mt-5">
-                   <div class="col-lg-6">
-                       <div class="table-responsive">
-                           <table class="table table-bordered mg-b-0 text-md-nowrap">
-                               <thead>
-                               <tr>
-                                   <th>ID</th>
-                                   <th>Seçenek</th>
-                                   <th>Fiyat $</th>
-                                   <th>Fiyat tl</th>
-                               </tr>
-                               </thead>
-                               <tbody>
-                               @if($product->parent_option != NULL)
-                                   <div class="sizes d-flex">Seçenekler:     </div>
+                    <div class="row row-sm  mt-5">
+                        <div class="col-lg-6">
+                            <div class="table-responsive">
+                                <table class="table table-bordered mg-b-0 text-md-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Seçenek</th>
+                                        <th>Fiyat $</th>
+                                        <th>Fiyat tl</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @if($product->parent_option != NULL)
+                                        <div class="sizes d-flex">Seçenekler:     </div>
 
-                                           @foreach($product->options($product->parent_option) as $option)
+                                        @foreach($product->options($product->parent_option) as $option)
 
-                                               <tr>
-                                                   <th scope="row">1</th>
-                                                   <td> {{$option->name}}</td>
-                                                   <td>{{$option->price}}</td>
-                                                   <td>$450,870</td>
-                                               </tr>
-                                           @endforeach
-
-
-
-                               @endif
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td> {{$option->name}}</td>
+                                                <td>{{$option->price}}</td>
+                                                <td>$450,870</td>
+                                            </tr>
+                                        @endforeach
 
 
-                               </tbody>
-                           </table>
-                       </div>
-                   </div>
-                   <div class="col-lg-6">
 
-                       @if($product->additional_aptions != NULL)
-                           <div class="sizes d-flex">Ek Seçenekler:     </div>
+                                    @endif
 
-                           @foreach( $product->additionaloptionsparent($product->additional_aptions) as $options)
 
-                               <div aria-multiselectable="true" class="accordion" id="accordion" role="tablist">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="sizes d-flex">Ek Seçenekler:     </div>
+                            @if($product->additional_options != NULL)
 
-                                   @foreach($options as $key => $option)
-                                       <div class="card mb-0">
-                                           <div class="card-header" id="headingOne" role="tab">
-                                               <a aria-controls="collapse{{$option->id}}" aria-expanded="true" data-toggle="collapse" href="#collapse{{$option->id}}">{{$option->name}}</a>
-                                           </div>
-                                           <div aria-labelledby="heading{{$option->id}}" class="collapse " data-parent="#accordion" id="collapse{{$option->id}}" role="tabpanel">
-                                               <div class="card-body">
-                                                   @foreach($product->additionaloption($option->id)  as $opt)
-                                                       <pre>{{  $opt->name  }} </pre>
-                                                   @endforeach
-                                               </div>
-                                           </div>
-                                       </div>
-                                   @endforeach
-                                   @endforeach
-                               </div><!-- accordion -->
-                               @endif
 
-                   </div>
-               </div>
+                                @foreach( $product->additionaloptionsparent($product->additional_options) as $options)
+
+                                    <div aria-multiselectable="true" class="accordion" id="accordion" role="tablist">
+
+                                        @foreach($options as $key => $option)
+                                            <div class="card mb-0">
+                                                <div class="card-header" id="headingOne" role="tab">
+                                                    <a aria-controls="collapse{{$option->id}}" aria-expanded="true" data-toggle="collapse" href="#collapse{{$option->id}}">{{$option->name}}</a>
+                                                </div>
+                                                <div aria-labelledby="heading{{$option->id}}" class="collapse " data-parent="#accordion" id="collapse{{$option->id}}" role="tabpanel">
+                                                    <div class="card-body">
+                                                        @foreach($product->additionaloption($option->id)  as $opt)
+                                                            <pre>{{  $opt->name  }} </pre>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @endforeach
+                                    </div><!-- accordion -->
+                                    @endif
+
+                        </div>
+                    </div>
 
                 </div>
 

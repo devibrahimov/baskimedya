@@ -150,7 +150,7 @@
                                     <div class="dropdown-menu">
                                         <a href="{{route('product.edit',$product->id)}}" class="dropdown-item"> <i class="las la-image"></i> Düzenle</a>
 
-                                        <a href="{{route('product.show',$product->id)}}" class="dropdown-item"> <i class="las la-trash"></i> Sil</a>
+{{--                                        <a href="{{route('product.show',$product->id)}}" class="dropdown-item"> <i class="las la-trash"></i> Sil</a>--}}
 
                                     </div>
                                 </div>
