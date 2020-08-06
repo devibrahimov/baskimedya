@@ -31,6 +31,10 @@
             </li>
 
             <li class="slide">
+                <a class="side-menu__item" href="{{route('references.index')}}"> <span class="side-menu__label">Referanslar</span> </a>
+            </li>
+
+            <li class="slide">
                 <a class="side-menu__item" href="{{route('services.index')}}"> <span class="side-menu__label">Hizmetler</span> </a>
             </li>
 

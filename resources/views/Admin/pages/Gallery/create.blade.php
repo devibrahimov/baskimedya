@@ -13,6 +13,7 @@
                 <form action="{{route('gallery.store')}}" class="dropzone rounded-5" id="dropzoneForm"  method="post" enctype="multipart/form-data">
                         @csrf
                     </form>
+
                     <div align="center" class="mt-1 mb-2">
                         <button type="button" class="btn btn-info-gradient  btn-block" id="submit-all">Upload</button>
                     </div>
@@ -64,6 +65,9 @@
             submitButton.addEventListener('click', function(){
                 myDropzone.processQueue();
             });
+
+            //this.on("complete", function(file) { alert("Added file."); });
+
 
             this.on("complete", function(){
                 if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)

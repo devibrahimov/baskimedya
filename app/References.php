@@ -4,13 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-class InformationCategory extends Model
+class References extends Model
 {
-    protected $table = 'informationcats';
+    protected $table = 'references';
     protected $guarded = [] ;
-
-
-
-
 }
