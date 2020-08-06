@@ -41,9 +41,13 @@
             <img src="{{asset('/storage/uploads/thumbnail/references/small/' . $reference->image)}}" class="img-thumbnail" alt="Responsive image">
             <div class="card-body">
                 <h4 class="card-title mb-3">{{$reference->name}}</h4>
-                <a class="btn btn-primary" href="#">Değiştir</a>
-                <a class="btn btn-danger" href="#">Sil</a>
-                <a class="btn btn-success" href="#">Kaydet</a>
+                <button class="btn btn-primary">Değiştir</button>
+                <form class="btn btn-danger btn-icon" action="{{route('references.destroy',$reference->id)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger btn-icon" value="DELETE" >Sil</button>
+                </form>
+                <button class="btn btn-success" href="#">Kaydet</button>
             </div>
         </div>
     </div>

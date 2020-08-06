@@ -105,6 +105,18 @@ class ReferencesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //dd(References::find($id));
+        $references = References::find($id);
+       // dd($references);
+        $deleted = $references->delete();
+
+        if($deleted){
+            \File::delete(public_path('storage/uploads/thumbnail/references/large/' . $references->image));
+            \File::delete(public_path('storage/uploads/thumbnail/references/medium/' . $references->image));
+            \File::delete(public_path('storage/uploads/thumbnail/references/small/' . $references->image));
+        }else{
+            return 'Fotograf silinemedi';
+        }
+        return redirect('/yonetim/references')->with('success','Basariyla Silindi!');
     }
 }
