@@ -254,4 +254,33 @@ public function imagedelete(Request $request){
 
     }
 }//end imagedelete
+
+
+    public function imageupdate(Request $request){
+
+        $this->validate(request(),['file'=>'image|mimes:jpg,jpeg,png']);
+
+        $file =  request()->file('file');
+        if($file->isValid()){
+
+            $filename= $file->getClientOriginalName() ;
+            $extention= $file->getClientOriginalExtension();
+            $newfilename= random_int(100,1000).time().'.'.$extention;
+
+        return $newfilename ;
+
+        //    $thisproductimages = ProductImage::where('product_id','=',request('product_id'))->find(request('imagename'));
+
+
+//                ProductImage::create([
+//                    'product_id'=> request('product_id'),
+//                    'name'=>$newfilename
+//                ]);
+
+
+
+        }
+
+    }
+
 }//end class

@@ -2,7 +2,39 @@
 
 @section('css')
 {{--    <!-- Internal Select2 css -->--}}
-    <link rel="stylesheet" href="/admin/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/admin/plugins/select2/css/select2.min.css" >
+    <style>
+        /* Container */
+        .container{
+            margin: 0 auto;
+            border: 0px solid black;
+            width: 50%;
+            height: 250px;
+            border-radius: 3px;
+            background-color: ghostwhite;
+            text-align: center;
+        }
+        /* Preview */
+        .preview{
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            background: white;
+        }
+
+        .preview img{
+            margin-bottom: 10px;
+            display: none;
+        }
+        /* Button */
+        .button{
+            border: 0px;
+            background-color: deepskyblue;
+            color: white;
+            padding: 5px 15px;
+            margin-left: 10px;
+        }
+    </style>
 @endsection
 
 
@@ -122,7 +154,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="form-group mb-0 mt-3 justify-content-end">
-                            <div>
+                            <div >
                                 <input type="submit" class="btn btn-primary" value="Güncelle">
                                 <a href="{{route('product.index')}}" class="btn btn-secondary">Vazgeç</a>
                             </div>
@@ -148,7 +180,10 @@
                                     <img src="/storage/uploads/thumbnail/products/medium/{{$product->image}}"   alt="">
                                     <button data-toggle="dropdown" class="btn btn-indigo btn-block">İşlemler <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i></button>
                                     <div class="dropdown-menu">
-                                        <a href="{{route('product.edit',$product->id)}}" class="dropdown-item"> <i class="las la-image"></i> Düzenle</a>
+{{--                                        <a href="{{route('product.edit',$product->id)}}" class="dropdown-item"> <i class="las la-image"></i> Düzenle</a>--}}
+                                        <a class="modal-effect dropdown-item" id="productimage" data-effect="effect-flip-horizontal" data-imagename="{{$product->image}}" data-productid="{{$product->id}}" data-toggle="modal" href="#modaldemo8">
+                                            <i class="las la-image"></i> Resmi Deyiştir
+                                        </a>
 
 {{--                                        <a href="{{route('product.show',$product->id)}}" class="dropdown-item"> <i class="las la-trash"></i> Sil</a>--}}
 
@@ -175,6 +210,36 @@
                             </div>
 
 
+                        <!-- Modal effects -->
+                        <div class="modal" id="modaldemo8">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content modal-content-demo">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title">Resmi Güncelle</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h6>Resim seçin</h6>
+                                        <div class="form-horizontal">
+                                            <form method="post" action="" enctype="multipart/form-data" id="myform">
+                                                <div class='preview'>
+                                                    <img src="" id="img" width="100" height="100">
+                                                </div>
+                                                <div class="mt-2">
+                                                    <input type="file" id="file" name="file" />
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input class="btn ripple btn-primary button" type="button" id="but_upload" value="Deyiştir">
+                                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Vazgeç</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Modal effects-->
 
                     </div>
                 </div>
@@ -185,6 +250,8 @@
         </div>
 
     <!-- row -->
+
+
 @endsection
 
 
@@ -209,4 +276,40 @@
 
     <!-- Internal form-elements js -->
     <script src="/admin/js/form-elements.js"></script>
+    <script src="/admin/js/modal.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            $("#but_upload").click(function(){
+
+                // var fd = new FormData();
+                // var files = $('#file')[0].files[0];
+
+              //  fd.append('file',files);
+
+
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+
+
+                $.ajax({
+                    url: '{{route('product.imageupdate')}}',
+                    type: 'post',
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    success: function(response){
+                        if(response != 0){
+                            $("#img").attr("src",response);
+                            $(".preview img").show(); // Display image element
+                        }else{
+                            alert('file not uploaded');
+                        }
+                    },
+                });
+            });
+        });
+
+    </script>
 @endsection

@@ -38,6 +38,7 @@ Route::group(['prefix'=>'yonetim'] , function (){
 
     Route::get('/productimageupload', 'Admin\Product\ProductController@imagesuploadpage')->name('product.images');
     Route::post('/productimagestore', 'Admin\Product\ProductController@imagestore')->name('product.imagestore');
+    Route::post('/productimageupdate', 'Admin\Product\ProductController@imageupdate')->name('product.imageupdate');
     Route::get('/productimagefetch', 'Admin\Product\ProductController@imagefetch')->name('product.imagefetch');
     Route::get('/productimagedelete', 'Admin\Product\ProductController@imagedelete')->name('product.imagedelete');
 

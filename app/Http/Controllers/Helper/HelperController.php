@@ -33,7 +33,7 @@ class HelperController extends Controller
        //create small thumbnail
        $smallthumbnailpath = public_path('/storage/uploads/thumbnail/'.$basedirectory.'/small/'.$newimagename);
 
-       $this->createThumbnail($image,$smallthumbnailpath, 150, 150);
+       $this->createThumbnail($image,$smallthumbnailpath, 260, 280);
 
        //create medium thumbnail
        $mediumthumbnailpath = public_path('/storage/uploads/thumbnail/'.$basedirectory.'/medium/'.$newimagename);

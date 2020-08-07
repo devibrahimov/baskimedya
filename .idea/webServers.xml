@@ -9,6 +9,13 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
+      <webServer id="2ac41b6a-f784-4313-9011-ff8726f7d686" name="yolyardimkonya" url="http://yolyardimkonya.com">
+        <fileTransfer host="yolyardimkonya.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

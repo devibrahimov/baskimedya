@@ -1,7 +1,8 @@
 <?php
 
-$instajson= file_get_contents('https://www.instagram.com/angelinajolie/?__a=1');
-$data = json_decode($instajson,true);
+$instajson= file_get_contents('https://www.instagram.com/tiryakioglupixelreklam/?__a=1');
+if(isset($instajson))
+    $instadata = json_decode($instajson,true);
 $image[]='';
 ?>
 
@@ -212,9 +213,11 @@ $image[]='';
                     <div class="widget">
                         <h6 class="widget_title">Instagram</h6>
                         <ul class="widget_instafeed instafeed_col4">
-{{--                            @foreach(array_slice($data['graphql']['user']['edge_owner_to_timeline_media']['edges'],0,8) as $image)--}}
-{{--                                <li><a href="#"><img src="<?=$image['node']['display_url']?>" alt="insta_img" style="width: 100px;height: 100px;"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>--}}
-{{--                              @endforeach--}}
+                            @if(isset($instadata))
+                            @foreach(array_slice($instadata['graphql']['user']['edge_owner_to_timeline_media']['edges'],0,8) as $image)
+                                <li><a href="#"><img src="<?=$image['node']['display_url']?>" alt="insta_img" style="width: 100px;height: 100px;"><span class="insta_icon"><i class="ti-instagram"></i></span></a></li>
+                              @endforeach
+                                @endif
                         </ul>
                     </div>
                 </div>
