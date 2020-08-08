@@ -3,6 +3,22 @@
 
 @section('content')
 
+    <!-- callbacks -->
+
+    <div class="alert alert-solid-success" role="alert" id="successCallback" style="display:none;">
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Başarılı!</strong> Resimler başarıyla eklendi!
+    </div>
+
+    <div class="alert alert-solid-danger mg-b-0" role="alert" id="dangerCallback" style="display:none;">
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Hata!</strong> Yükleme başarısız oldu.
+    </div>
+
+    <!-- /callbacks -->
+
     <div class="row">
         <div class="col-lg-12 col-md-12">
 
@@ -66,8 +82,29 @@
                 myDropzone.processQueue();
             });
 
-            //this.on("complete", function(file) { alert("Added file."); });
+            var x = document.getElementById("successCallback");
+            var y = document.getElementById("dangerCallback");
 
+            this.on("complete", function(file)
+            {
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                    y.style.display = "none";
+                } else {
+                    x.style.display = "none";
+                    y.style.display = "block";
+                }
+            });
+
+            this.on("error",function (file){
+                if (y.style.display === "none") {
+                    y.style.display = "block";
+                    x.style.display = "none";
+                } else {
+                    y.style.display = "none";
+                    x.style.display = "block";
+                }
+            });
 
             this.on("complete", function(){
                 if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
@@ -77,9 +114,7 @@
                 }
                 load_images();
             });
-
         }
-
     };
 
     load_images();

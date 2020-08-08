@@ -41,13 +41,22 @@
             <img src="{{asset('/storage/uploads/thumbnail/references/small/' . $reference->image)}}" class="img-thumbnail" alt="Responsive image">
             <div class="card-body">
                 <h4 class="card-title mb-3">{{$reference->name}}</h4>
-                <button class="btn btn-primary">Değiştir</button>
-                <form class="btn btn-danger btn-icon" action="{{route('references.destroy',$reference->id)}}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger btn-icon" value="DELETE" >Sil</button>
-                </form>
+                <div class="p-4">
+                <input class="form-control" placeholder="Referans Yeni Adı" required="" type="text" name="">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                        <label class="custom-file-label float-left" for="inputGroupFile01">Yeni Resim Ekle</label>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-around">
+
                 <button class="btn btn-success" href="#">Kaydet</button>
+                    <form class="btn btn-danger btn-icon" action="{{route('references.destroy',$reference->id)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-icon" value="DELETE" >Sil</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
