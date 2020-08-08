@@ -35,6 +35,7 @@ Route::group(['prefix'=>'yonetim'] , function (){
     Route::resource('/information','Admin\InformationController') ;
     Route::resource('/category','Admin\Product\CategoryController') ;
     Route::resource('/product','Admin\Product\ProductController') ;
+    Route::resource('/references','Admin\ReferencesController');
 
     Route::get('/productimageupload', 'Admin\Product\ProductController@imagesuploadpage')->name('product.images');
     Route::post('/productimagestore', 'Admin\Product\ProductController@imagestore')->name('product.imagestore');

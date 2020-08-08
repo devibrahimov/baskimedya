@@ -19,7 +19,7 @@ class ImageGaleryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  $images =Gallery::all();
+    {  $images = Gallery::all();
         return view('Admin.pages.Gallery.gallery',compact('images'));
     }
 
@@ -48,19 +48,18 @@ class ImageGaleryController extends Controller
         $file =  request()->file('file');
         if($file->isValid()){
 
-                $filename= $file->getClientOriginalName() ;
-                $extention= $file->getClientOriginalExtension();
-                $newfilename= random_int(1,2000).time().'.'.$extention;
+            $filename= $file->getClientOriginalName() ;
+            $extention= $file->getClientOriginalExtension();
+            $newfilename= random_int(1,2000).time().'.'.$extention;
             $helper = new Helper();
             $helper->imageupload( $file ,$newfilename,'gallery');
-               // $file->move('uploads/gallery/',$newfilename);
+            // $file->move('uploads/gallery/',$newfilename);
 
-                $img = Gallery::create([
-                    'name'=>$newfilename
-                ]);
+            $img = Gallery::create([
+                'name'=>$newfilename
+            ]);
 
         }
-
     }
 
     /**
@@ -112,9 +111,9 @@ class ImageGaleryController extends Controller
     {
          $images = Gallery::all();
         $output = '<div class="row">';
-
         foreach($images as $image)
         {
+
             $output .= '
       <div class="col-md-2" style="margin-bottom:16px;" align="center">
                 <img src="'.asset('/storage/uploads/thumbnail/gallery/small/' . $image->name).'" class="img-thumbnail" width="175" height="175" style="height:175px;" />
