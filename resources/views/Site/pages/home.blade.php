@@ -150,9 +150,11 @@
                     <div class="col-12">
                         <div class="client_logo carousel_slider owl-carousel owl-theme nav_style3" data-dots="false" data-nav="true" data-margin="30" data-loop="true" data-autoplay="true" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "767":{"items": "4"}, "991":{"items": "5"}}'>
                             <div class="item">
+{{--                                //@foreach($references as $reference)--}}
                                 <div class="cl_logo">
-                                    <img src="assets/images/cl_logo1.png" alt="cl_logo"/>
+                                    <img src="{{asset('/storage/uploads/thumbnail/references/small/861596885348.jpg')}}" alt="cl_logo"/>
                                 </div>
+{{--                               // @endforeach--}}
                             </div>
                             <div class="item">
                                 <div class="cl_logo">
