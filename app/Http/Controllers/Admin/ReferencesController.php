@@ -17,7 +17,7 @@ class ReferencesController extends Controller
     public function index()
     {
         $references = References::all();
-        return view('admin.pages.references.references',compact('references'));
+        return view('admin.pages.references.references', compact('references',$references));
     }
 
     /**
@@ -33,23 +33,23 @@ class ReferencesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
-            'image'=>'mimes:jpg,jpeg,png',
-            'name'=>'required'
+            'image' => 'mimes:jpg,jpeg,png',
+            'name' => 'required'
         ]);
 
         $references = new References([
-           'image'=>$request->file('image'),
-            'name'=>$request->get('name')
+            'image' => $request->file('image'),
+            'name' => $request->get('name')
         ]);
 
-        $file =  request()->file('image');
-       if($file->isValid()) {
+        $file = request()->file('image');
+        if ($file->isValid()) {
             $filename = $file->getClientOriginalName();
             $extention = $file->getClientOriginalExtension();
             $newfilename = random_int(1, 2000) . time() . '.' . $extention;
@@ -57,19 +57,19 @@ class ReferencesController extends Controller
             $helper->imageupload($file, $newfilename, 'references');
             $img = References::create([
                 'name' => $references->name,
-               'image'=>$newfilename
+                'image' => $newfilename
             ]);
-            return redirect('yonetim/references')->with('success','Basariyla Eklendi!');
+            return redirect('yonetim/references')->with('success', 'Basariyla Eklendi!');
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
         //
     }
@@ -77,46 +77,71 @@ class ReferencesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $references = Reference::find($id);
+        return view('yonetim/references', compact('refereneces'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'image' => 'mimes:jpg,jpeg,png',
+            'name' => 'required'
+        ]);
+
+        $references = new References([
+            'image' => $request->file('image'),
+            'name' => $request->get('name')
+        ]);
+
+        $references->name = $request->get('name');
+        $references->image = $request->file('image');
+        $file = $references->image;
+        if ($file->isValid()) {
+            $filename = $file->getClientOriginalName();
+            $extention = $file->getClientOriginalExtension();
+            $newfilename = random_int(1, 2000) . time() . '.' . $extention;
+            $helper = new Helper();
+            $helper->imageupload($file, $newfilename, 'references');
+            $img = References::create([
+                'name' => $references->name,
+                'image' => $newfilename
+            ]);
+            return redirect('yonetim/references')->with('success', 'Basariyla Eklendi!');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //dd(References::find($id));
         $references = References::find($id);
-       // dd($references);
+        // dd($references);
         $deleted = $references->delete();
 
-        if($deleted){
+        if ($deleted) {
             \File::delete(public_path('storage/uploads/thumbnail/references/large/' . $references->image));
             \File::delete(public_path('storage/uploads/thumbnail/references/medium/' . $references->image));
             \File::delete(public_path('storage/uploads/thumbnail/references/small/' . $references->image));
-        }else{
+        } else {
             return 'Fotograf silinemedi';
         }
-        return redirect('/yonetim/references')->with('success','Basariyla Silindi!');
+        return redirect('/yonetim/references')->with('success', 'Basariyla Silindi!');
     }
 }
