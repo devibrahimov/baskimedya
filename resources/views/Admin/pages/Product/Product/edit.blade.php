@@ -43,14 +43,14 @@
 
         <div class="row row-sm">
 
-            <div class="col-lg-7 col-xl-7 col-md-12 col-sm-12">
+
+            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
                 <form action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data" class="form-horizontal" >
                     @csrf
                     @method('PUT')
                 <div class="card  box-shadow-0">
                     <div class="card-header">
-                        <h4 class="card-title mb-1">Yeni Ürün ekle</h4>
-                        <p class="mb-2">Buradan yeni ürün ekleye bilirsiniz</p>
+                        <h4 class="card-title mb-1">  Ürün Düzenleme Sayfası</h4>
                     </div>
                     <div class="card-body pt-0">
 
@@ -60,16 +60,18 @@
                         </div>
                         <div class="form-group">
                             <label for="">Ürün açıklaması</label>
-                            <textarea name="description" class="form-control " id="" cols="30" rows="10">{{$product->description }}</textarea>
+                            <textarea name="description" class="form-control " id="" cols="20" rows="5">{{$product->description }}</textarea>
                         </div>
-
+                        <div class="row">
                         @foreach(json_decode($product->meta) as $k=>$v)
-                        <div class="form-group">
-                            <label >Ürün Meta {{$k}}</label>
-                            <input type="text" class="form-control" id="inputName" name="meta{{$k}}"  value="{{$v}}">
-                        </div>
+                         <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <label >Ürün Meta {{$k}}</label>
+                                <input type="text" class="form-control" id="inputName" name="meta{{$k}}"  value="{{$v}}">
+                            </div>
+                         </div>
                         @endforeach
-
+                        </div>
 
                         <div class="row">
                             <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
@@ -164,93 +166,88 @@
 
                 </form>
             </div>
-
-            <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12">
+            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
 
 
                 <div class="card  box-shadow-0">
                     <div class="card-header">
-                        <h4 class="card-title mb-1">Ürün Resimleri</h4>
-                        <p class="mb-2"> </p>
+                        @if($images->count() <5)
+                            <a href="{{route('product.images',$product->id)}}" class="btn btn-info btn-with-icon btn-block rounded-0" type="submit"><i class="typcn typcn-image"></i>Resim Ekle</a>
+                        @endif
                     </div>
                     <div class="card-body pt-0">
 
-                            <div class="row border-dark">
-                                <div class="col-lg-12 col-xl-12 col-md-6 col-sm-6 pro-img-box">
-                                    <img src="/storage/uploads/thumbnail/products/medium/{{$product->image}}"   alt="">
-                                    <button data-toggle="dropdown" class="btn btn-indigo btn-block">İşlemler <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i></button>
-                                    <div class="dropdown-menu">
-{{--                                        <a href="{{route('product.edit',$product->id)}}" class="dropdown-item"> <i class="las la-image"></i> Düzenle</a>--}}
-                                        <a class="modal-effect dropdown-item" id="productimage" data-effect="effect-flip-horizontal" data-imagename="{{$product->image}}" data-productid="{{$product->id}}" data-toggle="modal" href="#modaldemo8">
-                                            <i class="las la-image"></i> Resmi Deyiştir
-                                        </a>
+                        <div class="row  border-dark">
 
-{{--                                        <a href="{{route('product.show',$product->id)}}" class="dropdown-item"> <i class="las la-trash"></i> Sil</a>--}}
+                            <div class="col-xl-3 col-lg-3 col-md-6">
+                                <div class="card text-center">
+                                    <div style="height:200px;background: url('/storage/uploads/thumbnail/products/medium/{{$product->image}}') no-repeat;
+                                        background-size: cover;background-position: center center !important;" ></div>
 
-                                    </div>
+                                    {{--                                        <form action="{{route('product.imageupdate',$product->id)}}" method="post" enctype="multipart/form-data" class="card-body">--}}
+                                    {{--                                            @csrf--}}
+
+                                    {{--                                        <input type="file" name="image" >--}}
+                                    <a class="btn btn-info  btn-with-icon btn-block rounded-0"  id="productcoverimage" data-productid="{{$product->id}}" data-imagename="{{$product->image}}" data-toggle="modal" href="#modaldemo8"  ><i class='typcn typcn-image'></i>  Güncelle </a>
+                                    {{--                                        </form>--}}
+
                                 </div>
-
                             </div>
 
+                            @foreach($images as $img)
+                                <div class="col-xl-3 col-lg-3 col-md-6">
+                                    <div class="card text-center">
+                                        <div style="height:200px;background: url('/storage/uploads/thumbnail/products/medium/{{$img->name}}') no-repeat;
+                                            background-size: cover;background-position: center center !important;" ></div>
 
-                            <div class="row  border-dark">
-                                @foreach($images as $img)
-                                <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 mt-3 pro-img-box">
-                                    <img src="/storage/uploads/thumbnail/products/medium/{{$img->name}}"   alt="">
-                                    <button data-toggle="dropdown" class="btn btn-indigo btn-block">İşlemler <i class="icon ion-ios-arrow-down tx-11 mg-l-3"></i></button>
-                                    <div class="dropdown-menu">
+                                        <div class="btn-icon-list ">
+                                            <button type="submit" class="btn btn-info btn-with-icon rounded-0 btn-block productcoverimage" data-toggle="modal" href="#modaldemo8"   data-productid="{{$product->id}}"data-imageid="{{$img->id}}" data-imagename="{{$img->name}}" ><i class="typcn typcn-image"></i> Güncelle</button>
 
-                                        <a href="{{route('product.edit',$product->id)}}" class="dropdown-item"> <i class="las la-edit"></i> Düzenle</a>
-
-                                        <a href="{{route('product.show',$product->id)}}" class="dropdown-item"> <i class="las la-trash"></i> Sil</a>
-
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-
-
-                        <!-- Modal effects -->
-                        <div class="modal" id="modaldemo8">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content modal-content-demo">
-                                    <div class="modal-header">
-                                        <h6 class="modal-title">Resmi Güncelle</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h6>Resim seçin</h6>
-                                        <div class="form-horizontal">
-                                            <form method="post" action="" enctype="multipart/form-data" id="myform">
-                                                <div class='preview'>
-                                                    <img src="" id="img" width="100" height="100">
-                                                </div>
-                                                <div class="mt-2">
-                                                    <input type="file" id="file" name="file" />
-
-                                                </div>
+                                            <form action="{{route('product.productimagedelete')}}"  method="post">
+                                                @csrf   <input type="hidden" name="name" value="{{$img->name}}"> <input type="hidden" name="id" value="{{$img->id}}">
+                                                <button class="btn btn-danger btn-with-icon btn-block rounded-0 " type="submit"><i class="typcn typcn-trash"></i> Sil</button>
                                             </form>
                                         </div>
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input class="btn ripple btn-primary button" type="button" id="but_upload" value="Deyiştir">
-                                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Vazgeç</button>
+
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
+
                         </div>
-                        <!-- End Modal effects-->
+
 
                     </div>
                 </div>
 
             </div>
-        </div>
+             </div>
 
         </div>
 
     <!-- row -->
+    <!-- Modal effects -->
+    <div class="modal" id="modaldemo8">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h6 class="modal-title">Ürün Fotoğrafını Değiştir</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" >
+                    <div id="showimage" class="mb-2">
 
+                    </div>
+                    <div id="editimageform">
+
+                    </div>
+
+
+                  </div>
+                <div class="modal-footer">   </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal effects-->
 
 @endsection
 
@@ -281,34 +278,37 @@
     <script>
         $(document).ready(function(){
 
-            $("#but_upload").click(function(){
+            $('#productcoverimage').click(function (){
 
-                // var fd = new FormData();
-                // var files = $('#file')[0].files[0];
+                var id = $(this).data('productid');
+                var imagename = $(this).data('imagename');
 
-              //  fd.append('file',files);
+                 var image = '<img src="/storage/uploads/thumbnail/products/medium/'+imagename+'"   width="200" height="200">';
 
+                   var form = '<form action="{{route('product.imageupdate')}}" method="post" enctype="multipart/form-data">@csrf <input type="hidden" class="form-control" name="productid" value="{{$product->id}}"> <input type="hidden" class="form-control" name="productimg" value="{{$product->image}}"> <input type="hidden" name="imagetype" value="1"> <div class="input-group">\n' +
+                       ' <input type="file" class="form-control" name="image"> <span class="input-group-btn"><button class="btn btn-primary rounded-0" type="submit"><span class="input-group-btn">Deyiştir</span></button></span>\n' +
+                   ' </div>  </form>';
 
-                var id = $(this).data('id');
-                var name = $(this).data('name');
-
-
-                $.ajax({
-                    url: '{{route('product.imageupdate')}}',
-                    type: 'post',
-                    data: fd,
-                    contentType: false,
-                    processData: false,
-                    success: function(response){
-                        if(response != 0){
-                            $("#img").attr("src",response);
-                            $(".preview img").show(); // Display image element
-                        }else{
-                            alert('file not uploaded');
-                        }
-                    },
-                });
+                $("#showimage").html(image);
+                $("#editimageform").html(form);
+                console.log(id+'--'+imagename);
             });
+
+            $('.productcoverimage').click(function (){
+
+                var productid = $(this).data('productid');
+                var imagename = $(this).data('imagename');
+                var imageid = $(this).data('imageid');
+                var image = '<img src=   "/storage/uploads/thumbnail/products/medium/'+imagename+'"   width="200" height="200">';
+                var form = '<form action="{{route('product.imageupdate')}}" method="post" enctype="multipart/form-data">@csrf <input type="hidden"  name="productid" value="'+productid+'"> <input type="hidden"  name="imagename" value="'+imagename+'"> <input type="hidden"  name="imageid" value="'+imageid+'">  <input type="hidden" name="imagetype" value="2"> <div class="input-group">\n' +
+                    ' <input type="file" class="form-control" name="image"> <span class="input-group-btn"><button class="btn btn-primary rounded-0" type="submit"><span class="input-group-btn">Deyiştir</span></button></span>\n' +
+                    ' </div>  </form>';
+
+                $("#showimage").html(image);
+                $("#editimageform").html(form);
+                console.log(id+'--'+imagename+'----'+imageid);
+            });
+
         });
 
     </script>

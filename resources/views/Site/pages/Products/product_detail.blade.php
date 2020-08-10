@@ -158,7 +158,7 @@
                                 <hr>
 
 
-                                @if($product->additional_aptions != NULL)
+                                @if($product->additional_options != NULL)
                                 <p>Ek Seçenekler</p>
                                     @foreach( $product->additionaloptionsparent($product->additional_options) as $options)
                                         @foreach($options as $key => $option)

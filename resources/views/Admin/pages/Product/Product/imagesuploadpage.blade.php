@@ -12,14 +12,14 @@
 
                     <form action="{{route('product.imagestore')}}" class="dropzone rounded-5" id="dropzoneForm"  method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" value="{{session()->get('id')}}"  name="product_id" >
+                        <input type="hidden" value="{{$id}}"  name="product_id" >
                     </form>
                     <div class="row mt-2">
                         <div class="col-md-6 col-lg-6 col-sm-6">
                             <button type="button" class="btn btn-info-gradient  btn-block" id="submit-all">Yükle</button>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-6">
-                            <a href="{{route('product.create')}}" class="btn btn-success-gradient  btn-block" >İşlemi Sonlandır</a>
+                            <a href="{{back()}}" class="btn btn-success-gradient  btn-block" >İşlemi Sonlandır</a>
                         </div>
                     </div>
                     <div align="center" class="mt-1 mb-2">

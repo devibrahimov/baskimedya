@@ -85,7 +85,8 @@ class ProductController extends Controller
                $save = $product->save() ;
 
                if ($save)
-                   return redirect()->route('product.images')->with('id',$product->id);
+                   return redirect()->route('product.images',$product->id);
+               //->with('id',$product->id);
 
             }
         }
@@ -186,8 +187,8 @@ class ProductController extends Controller
 
 //PRODUCT IMAGES Processing
 
-    public function imagesuploadpage(){
-        return view('Admin.pages.Product.Product.imagesuploadpage');
+    public function imagesuploadpage($id){
+        return view('Admin.pages.Product.Product.imagesuploadpage',compact('id'));
     }
 
 public function imagestore(Request $request){
@@ -247,8 +248,10 @@ public function imagedelete(Request $request){
             \File::delete(public_path('storage/uploads/thumbnail/products/large/' . $request->get('name')));
             \File::delete(public_path('storage/uploads/thumbnail/products/medium/' . $request->get('name')));
             \File::delete(public_path('storage/uploads/thumbnail/products/small/' . $request->get('name')));
+
+           return back()->with('success','Ürün fotoğrafı başarı ile Silindi');
         }else{
-            return 'Fotograf silinemedi';
+            return back()->with('error','Seçilmiş olan ürün fotoğrafı silinemedi');
         }
 
 
@@ -256,31 +259,88 @@ public function imagedelete(Request $request){
 }//end imagedelete
 
 
-    public function imageupdate(Request $request){
 
-        $this->validate(request(),['file'=>'image|mimes:jpg,jpeg,png']);
+    public function productimagedelete(Request $request){
+        if($request->get('name') && $request->get('id'))
+        {
+            $image = ProductImage::find($request->get('id'));
+            $deleted = $image->delete();
+            if($deleted){
+                \File::delete(public_path('storage/uploads/products/' . $request->get('name')));
+                \File::delete(public_path('storage/uploads/thumbnail/products/large/' . $request->get('name')));
+                \File::delete(public_path('storage/uploads/thumbnail/products/medium/' . $request->get('name')));
+                \File::delete(public_path('storage/uploads/thumbnail/products/small/' . $request->get('name')));
 
-        $file =  request()->file('file');
-        if($file->isValid()){
-
-            $filename= $file->getClientOriginalName() ;
-            $extention= $file->getClientOriginalExtension();
-            $newfilename= random_int(100,1000).time().'.'.$extention;
-
-        return $newfilename ;
-
-        //    $thisproductimages = ProductImage::where('product_id','=',request('product_id'))->find(request('imagename'));
-
-
-//                ProductImage::create([
-//                    'product_id'=> request('product_id'),
-//                    'name'=>$newfilename
-//                ]);
-
+                return back()->with('success','Ürün fotoğrafı başarı ile Silindi');
+            }else{
+                return back()->with('error','Seçilmiş olan ürün fotoğrafı silinemedi');
+            }
 
 
         }
+    }//end imagedelete
+
+
+
+    public function productimageupdate(Request $request){
+
+     $this->validate(request(),['image'=>'image|mimes:jpg,jpeg,png']);
+
+        $file =  request()->file('image');
+
+        $productid = $request->productid;
+
+        if($file->isValid()){
+            $helper = new Helper();
+            if($request->imagetype == 1){
+                $productimg = $request->productimg;
+                $product = Product::find($productid);
+
+                $filename= $file->getClientOriginalName() ;
+                $extention = $file->getClientOriginalExtension();
+                $newfilename = random_int(100,1000).time().'.'.$extention;
+
+
+
+                $uploading = $helper->imageupload( $file,$newfilename,'products');
+
+
+                    $product->image = $newfilename;
+                  //  return $product->image.'-----'.$newfilename;
+                    $save = $product->save();
+
+                    if($save){  $helper->deleteimages($productimg ,'products');  }
+
+                return back()->with('success','Ürün fotoğrafı başarı ile güncellendi');
+
+            }
+
+            if($request->imagetype == 2){
+
+               $imageid = $request->imageid ;
+               $imagename  = $request->imagename;
+               $image = ProductImage::find($imageid);
+
+                $filename= $file->getClientOriginalName() ;
+                $extention = $file->getClientOriginalExtension();
+                $newfilename = random_int(100,1000).time().'.'.$extention;
+
+
+                 $helper->imageupload( $file,$newfilename,'products');
+
+                $image->name = $newfilename;
+
+                $save = $image->save();
+
+                if($save){  $helper->deleteimages($imagename ,'products');  }
+
+                return back()->with('success','Ürün fotoğrafı başarı ile güncellendi');
+
+            }
+
+        }//isValid
 
     }
+
 
 }//end class

@@ -16,6 +16,13 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
+      <webServer id="8396c316-c660-45b2-9409-655667ec396a" name="coronaturkiye" url="http://coronaturkiye.site">
+        <fileTransfer rootFolder="/public_html" host="coronaturkiye.site" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

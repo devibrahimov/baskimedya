@@ -67,28 +67,28 @@
     <div class="container-fluid">
         <!-- breadcrumb -->
         <div class="breadcrumb-header justify-content-between">
-            <div class="left-content">
-                <div>
-                    <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Merhaba, Hoşgeldiniz!</h2>
-                    <p class="mg-b-0">Satışlarınıza dair tüm bilgileri buradan takip edebilirsiniz.</p>
-                </div>
-            </div>
-            <div class="main-dashboard-header-right">
-                <div>
-                    <label class="tx-13">Müşteri Değerlendirmeleri</label>
-                    <div class="main-star">
-                        <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star"></i> <span>(14,873)</span>
-                    </div>
-                </div>
-                <div>
-                    <label class="tx-13">Online Satışlar</label>
-                    <h5>563,275</h5>
-                </div>
-                <div>
-                    <label class="tx-13">Offline Satışlar</label>
-                    <h5>783,675</h5>
-                </div>
-            </div>
+{{--            <div class="left-content">--}}
+{{--                <div>--}}
+{{--                    <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Merhaba, Hoşgeldiniz!</h2>--}}
+{{--                    <p class="mg-b-0">Satışlarınıza dair tüm bilgileri buradan takip edebilirsiniz.</p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="main-dashboard-header-right">--}}
+{{--                <div>--}}
+{{--                    <label class="tx-13">Müşteri Değerlendirmeleri</label>--}}
+{{--                    <div class="main-star">--}}
+{{--                        <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star"></i> <span>(14,873)</span>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div>--}}
+{{--                    <label class="tx-13">Online Satışlar</label>--}}
+{{--                    <h5>563,275</h5>--}}
+{{--                </div>--}}
+{{--                <div>--}}
+{{--                    <label class="tx-13">Offline Satışlar</label>--}}
+{{--                    <h5>783,675</h5>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
         <!-- /breadcrumb -->
         @if ($errors->any())
@@ -167,7 +167,7 @@
  <!--Internal  index js -->
  <script src="/admin/js/index.js"></script>
  <!--Internal  Datatable js -->
- <script src="/admin/js/table-data.js"></script>
+{{-- <script src="/admin/js/table-data.js"></script>--}}
  @yield('editor')
 
  @yield('js')
