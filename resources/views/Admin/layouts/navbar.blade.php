@@ -48,7 +48,8 @@
                         <a class="dropdown-item" href="#"><i class="bx bxs-inbox"></i>Gelen Kutusu</a>
                         <a class="dropdown-item" href="#"><i class="bx bx-envelope"></i>Mesajlar</a>
                         <a class="dropdown-item" href="#"><i class="bx bx-slider-alt"></i> Hesap Ayarları</a>
-                        <a class="dropdown-item" href="page-signin.html"><i class="bx bx-log-out"></i> Çıkış Yap</a>
+<a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('form-submit').submit()"><i class="bx bx-log-out"></i> Çıkış Yap</a>
+
                     </div>
                 </div>
 
@@ -56,3 +57,8 @@
         </div>
     </div>
 </div>
+
+
+<form action="{{route('admin.logout')}}" method="post" id="form-submit" style="display: none;">
+    @csrf
+</form>

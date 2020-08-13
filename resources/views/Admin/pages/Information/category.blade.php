@@ -7,14 +7,15 @@
         <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12">
             <div class="card  box-shadow-0">
                 <div class="card-header">
-                    <h4 class="card-title mb-1">Yeni Kullanıcı Ekle</h4>
-                    <p class="mb-2">Site Kullanıcısı ve Yönetici olarak iki Kullanıcı tipi bulunmaktadır</p>
+                    <h4 class="card-title mb-1">BİLGİLENDİRME Sayfası Ekle</h4>
+                    <p class="mb-2">Site Kullanıcıları Bilgilendirmelerinin Tutulduöu Sayfalar </p>
                 </div>
                 <div class="card-body pt-0">
                     <form class="form-horizontal" action="{{route('inform.addcategory')}}" method="POST">
                         {{ csrf_field()}}
                         <div class="form-group">
-                            <input type="text" class="form-control"  id="inputName" name="name" value="{{old('name')}}" placeholder="İsim Soyisim" required>
+                            <label for="inputName"> Yeni Sayfa Ekle</label>
+                            <input type="text" class="form-control"  id="inputName" name="name" value="{{old('name')}}" required>
                         </div>
 
 
@@ -56,9 +57,9 @@
                                                <a href="{{route('inform.edit',$cat->id)}}" class="btn btn-primary btn-icon"><i class="typcn typcn-edit"></i></a>
 
                                                <form class="btn btn-danger btn-icon" action="{{route('inform.delete',$cat->id)}}" method="post">
-                                                   {{ csrf_field() }}
+                                                   @csrf
                                                    {{ method_field('DELETE') }}
-                                                   <button class="btn btn-danger btn-icon" ><i class="typcn typcn-trash"></i></button>
+                                                   <button type="submit" class="btn btn-danger btn-icon" ><i class="typcn typcn-trash"></i></button>
                                                </form>
                                            </div>
                                        </td>

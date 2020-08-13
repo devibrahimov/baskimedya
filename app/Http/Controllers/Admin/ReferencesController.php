@@ -95,31 +95,7 @@ class ReferencesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'image' => 'mimes:jpg,jpeg,png',
-            'name' => 'required'
-        ]);
 
-        $references = new References([
-            'image' => $request->file('image'),
-            'name' => $request->get('name')
-        ]);
-
-        $references->name = $request->get('name');
-        $references->image = $request->file('image');
-        $file = $references->image;
-        if ($file->isValid()) {
-            $filename = $file->getClientOriginalName();
-            $extention = $file->getClientOriginalExtension();
-            $newfilename = random_int(1, 2000) . time() . '.' . $extention;
-            $helper = new Helper();
-            $helper->imageupload($file, $newfilename, 'references');
-            $img = References::create([
-                'name' => $references->name,
-                'image' => $newfilename
-            ]);
-            return redirect('yonetim/references')->with('success', 'Basariyla Eklendi!');
-        }
     }
 
     /**
@@ -128,20 +104,72 @@ class ReferencesController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( int $id)
     {
-        //dd(References::find($id));
-        $references = References::find($id);
-        // dd($references);
-        $deleted = $references->delete();
 
-        if ($deleted) {
-            \File::delete(public_path('storage/uploads/thumbnail/references/large/' . $references->image));
-            \File::delete(public_path('storage/uploads/thumbnail/references/medium/' . $references->image));
-            \File::delete(public_path('storage/uploads/thumbnail/references/small/' . $references->image));
-        } else {
-            return 'Fotograf silinemedi';
+        $reference = References::find($id);
+        $helper = new Helper() ;
+
+        $imagedel = $helper->deleteimages($reference->image ,'references');
+
+       if(!$imagedel){
+           return back()->with('error', 'Referans Firması Resimleri Silinirken hata oluştu!');
+       }
+        $delete  = $reference->delete();
+
+        if(!$delete){
+        return back()->with('error', 'Referans Firması  Silinemedi!');
         }
-        return redirect('/yonetim/references')->with('success', 'Basariyla Silindi!');
+        return back()->with('success', 'Referans Firması Başariyla Silindi!');
+
     }
+
+
+
+
+    public function referenceupdate(Request $request){
+
+        $request->validate([
+            'name' => 'required|string|max:100'
+        ]);
+
+
+        $name  = $request->name;
+        $referenceid=$request->referenceid;
+
+        $reference=References::find($referenceid);
+        $reference->name = $name;
+        if(request()->hasFile('image')){
+            $file  =  $request->file('image');
+            $this->validate(request(),['file'=>'image|mimes:jpg,jpeg,png']);
+        if ($file->isValid()) {
+            $filename = $file->getClientOriginalName();
+            $extention = $file->getClientOriginalExtension();
+            $newfilename = random_int(1, 2000) . time() . '.' . $extention;
+
+            $helper = new Helper();
+            $helper->imageupload($file, $newfilename, 'references');
+
+
+
+            $helper->imageupload( $file,$newfilename,'references');
+
+
+            $reference->image = $newfilename;
+            $save = $reference->save();
+            $helper->deleteimages($request->imagename ,'references');
+
+            return back()->with('success', 'Basariyla Yenilendi!');
+        }
+        }
+        $save = $reference->save();
+        return back()->with('success', 'Basariyla Yenilendi!');
+
+    }
+
+
+
+
+
+
 }

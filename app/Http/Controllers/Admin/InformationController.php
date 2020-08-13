@@ -86,7 +86,7 @@ public function deletecategory($id){
     {
         $infos = Info::all();
         $cats = InfoCat::all();
-        return view('Sdmin.pages.Information.index',compact(['cats','infos']));
+        return view('Admin.pages.Information.index',compact(['cats','infos']));
     }
 
     /**

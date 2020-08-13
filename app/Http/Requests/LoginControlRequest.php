@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginControlRquest extends FormRequest
+class LoginControlRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class LoginControlRquest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,19 @@ class LoginControlRquest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' =>'required|email|max:50',
+            'passwd'=>'required|string'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.required'=>'email alanını boş bırakamazsınız',
+            'email.email'=>'hatalı email bilgisi girdiniz.Lütfen kontrol edin ve yeniden deneyin',
+            "email.max" => "girdiyiniz veri 30 karakterden fazla olamaz.",
+            "passwd.required"=>"Şifre alanı boş bırakılamaz.",
+            'passwd.string'=>'Şifre alanına girdiyiniz veri metin tipi değildir. '
         ];
     }
 }

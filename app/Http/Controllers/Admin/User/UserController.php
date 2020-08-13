@@ -90,8 +90,8 @@ class UserController extends Controller
         $user->token =  Hash::make(random_int(1,60));
         $user->role = request('rdio');
 
-        $user->save();
-
+         $user->save();
+        auth()->login($user);
         return back();
 
     }//end store

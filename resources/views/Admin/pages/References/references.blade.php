@@ -57,12 +57,14 @@
                                 <div class="card text-center">
                                     <div style="height:200px;background: url('/storage/uploads/thumbnail/references/medium/{{$reference->image}}') no-repeat;
                                         background-size: cover;background-position: center center !important;" ></div>
-
+                                        <div class="card-body border-top">
+                                            <h4> {{$reference->name}}</h4>
+                                        </div>
                                     <div class="btn-icon-list ">
-                                        <button type="button" class="btn btn-info btn-with-icon rounded-0 btn-block referenceimage" data-toggle="modal" href="#modaldemo8"   data-referenceid="{{$reference->id}}" data-imagename="{{$reference->image}}" ><i class="typcn typcn-image"></i> Güncelle</button>
+                                        <button type="button" class="btn btn-info btn-with-icon rounded-0 btn-block referenceimage" data-toggle="modal" href="#modaldemo8"   data-referencesname="{{$reference->name}}" data-referencesid="{{$reference->id}}" data-imagename="{{$reference->image}}" ><i class="typcn typcn-image"></i> Güncelle</button>
 
-                                        <form action="{{route('product.productimagedelete')}}"  method="post">
-                                            @csrf   <input type="hidden" name="name" value="{{$reference->name}}"> <input type="hidden" name="id" value="{{$reference->id}}">
+                                        <form action="{{route('references.destroy',$reference->id)}}"  method="post">
+                                            @csrf   @method('DELETE')
                                             <button class="btn btn-danger btn-with-icon btn-block rounded-0 " type="submit"><i class="typcn typcn-trash"></i> Sil</button>
                                         </form>
                                     </div>
@@ -112,11 +114,12 @@
     $(document).ready(function(){
         $('.referenceimage').click(function (){
 
-        var productid = $(this).data('productid');
+        var referencename = $(this).data('referencesname');
         var imagename = $(this).data('imagename');
-        var imageid = $(this).data('imageid');
+        var referenceid = $(this).data('referencesid');
+
         var image = '<img src=   "/storage/uploads/thumbnail/references/medium/'+imagename+'"   width="200" height="200">';
-        var form = '<form action="{{route('product.imageupdate')}}" method="post" enctype="multipart/form-data">@csrf <input type="hidden"  name="productid" value="'+productid+'"> <input type="hidden"  name="imagename" value="'+imagename+'"> <input type="hidden"  name="imageid" value="'+imageid+'">  <input type="hidden" name="imagetype" value="2"> <div class="input-group">\n' +
+        var form = '<form action="{{route('reference.updatemethod')}}" method="post" enctype="multipart/form-data">@csrf <input type="text" name="name"   class="form-control mb-1"  value="'+referencename+'">  <input type="hidden"  name="imagename" value="'+imagename+'"> <input type="hidden"  name="referenceid" value="'+referenceid+'"> <div class="input-group">\n' +
             ' <input type="file" class="form-control" name="image"> <span class="input-group-btn"><button class="btn btn-primary rounded-0" type="submit"><span class="input-group-btn">Deyiştir</span></button></span>\n' +
             ' </div>  </form>';
 

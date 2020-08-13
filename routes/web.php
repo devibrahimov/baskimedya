@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\admin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,47 +22,56 @@ use Illuminate\Support\Facades\Route;
 //    return view('admin.pages.home');
 //});
 
-Route::group(['prefix'=>'yonetim'] , function (){
+Route::group([ 'prefix'=>'login' ] , function () {   //'middleware' =>  'admin' ,
 
-    Route::get('/','Admin\AdminController@index')->name('admin.home') ;
-
-    Route::resource('/user','Admin\User\UserController') ;
-    Route::get('/admins','Admin\User\UserController@admins')->name('user.admins') ;
-
-    Route::resource('/about','Admin\AboutController') ;
-    Route::resource('/setting','Admin\SettingController') ;
-    Route::resource('/services','Admin\ServicesController') ;
-    Route::resource('/gallery','Admin\ImageGaleryController') ;
-    Route::resource('/information','Admin\InformationController') ;
-    Route::resource('/category','Admin\Product\CategoryController') ;
-    Route::resource('/product','Admin\Product\ProductController') ;
-    Route::resource('/references','Admin\ReferencesController');
-
-
-    // PRODUCT IMAGE ROUTES
-    Route::get('/productimageupload/{id}', 'Admin\Product\ProductController@imagesuploadpage')->name('product.images');
-    Route::post('/productimagestore', 'Admin\Product\ProductController@imagestore')->name('product.imagestore');
-    Route::get('/productimagefetch', 'Admin\Product\ProductController@imagefetch')->name('product.imagefetch');
-
-    Route::post('/productimageupdate', 'Admin\Product\ProductController@productimageupdate')->name('product.imageupdate');
-
-    Route::get('/productimagedelete', 'Admin\Product\ProductController@imagedelete')->name('product.imagedelete');
-    Route::post('/productimagesdelete', 'Admin\Product\ProductController@productimagedelete')->name('product.productimagedelete');
-
-    Route::resource('/options','Admin\Product\OptionController') ;
-    Route::resource('/additionaloptions','Admin\Product\AdditionalOptionsController') ;
-    Route::get('/statictics','Admin\StatisticsController@index')->name('statistics.index');
-
-    Route::get('informationcat','Admin\InformationController@createcategory')->name('inform.category');
-    Route::post('informationcat','Admin\InformationController@storecategory')->name('inform.addcategory');
-    Route::get('informationcat/{id}','Admin\InformationController@editcategory')->name('inform.edit');
-    Route::post('informationcat/{id}/edit','Admin\InformationController@updatecategory')->name('inform.update');
-    Route::delete('informationcat/{id}','Admin\InformationController@deletecategory')->name('inform.delete');
-
-    Route::get('/gallerys', 'Admin\ImageGaleryController@fetch')->name('gallery.fetch');
-    Route::get('/galleryss', 'Admin\ImageGaleryController@delete')->name('gallery.delete');
+    Route::get('/', 'AdmincontrollController@loginpage')->name('admin.login');
+    Route::post('/', 'AdmincontrollController@login');
+    Route::post('/cikis', 'AdmincontrollController@logout')->name('admin.logout');
 
 });
+
+
+Route::group(['middleware'=>['auth'] ,'prefix'=>'yonetim' ] , function (){   //'middleware' =>  'admin' ,
+
+         Route::get('/','Admin\AdminController@index')->name('admin.home') ;
+
+        Route::resource('/user','Admin\User\UserController') ;
+        Route::get('/admins','Admin\User\UserController@admins')->name('user.admins') ;
+
+        Route::resource('/about','Admin\AboutController') ;
+        Route::resource('/setting','Admin\SettingController') ;
+        Route::resource('/services','Admin\ServicesController') ;
+        Route::resource('/gallery','Admin\ImageGaleryController') ;
+        Route::resource('/information','Admin\InformationController') ;
+        Route::resource('/category','Admin\Product\CategoryController') ;
+        Route::resource('/product','Admin\Product\ProductController') ;
+        Route::resource('/references','Admin\ReferencesController');
+
+        Route::post('/referencesupdate','Admin\ReferencesController@referenceupdate')->name('reference.updatemethod');
+        // PRODUCT IMAGE ROUTES
+        Route::get('/productimageupload/{id}', 'Admin\Product\ProductController@imagesuploadpage')->name('product.images');
+        Route::post('/productimagestore', 'Admin\Product\ProductController@imagestore')->name('product.imagestore');
+        Route::get('/productimagefetch', 'Admin\Product\ProductController@imagefetch')->name('product.imagefetch');
+
+        Route::post('/productimageupdate', 'Admin\Product\ProductController@productimageupdate')->name('product.imageupdate');
+
+        Route::get('/productimagedelete', 'Admin\Product\ProductController@imagedelete')->name('product.imagedelete');
+        Route::post('/productimagesdelete', 'Admin\Product\ProductController@productimagedelete')->name('product.productimagedelete');
+
+        Route::resource('/options','Admin\Product\OptionController') ;
+        Route::resource('/additionaloptions','Admin\Product\AdditionalOptionsController') ;
+        Route::get('/statictics','Admin\StatisticsController@index')->name('statistics.index');
+
+        Route::get('informationcat','Admin\InformationController@createcategory')->name('inform.category');
+        Route::post('informationcat','Admin\InformationController@storecategory')->name('inform.addcategory');
+        Route::get('informationcat/{id}','Admin\InformationController@editcategory')->name('inform.edit');
+        Route::post('informationcat/{id}/edit','Admin\InformationController@updatecategory')->name('inform.update');
+        Route::delete('informationcat/{id}','Admin\InformationController@deletecategory')->name('inform.delete');
+
+        Route::get('/gallerys', 'Admin\ImageGaleryController@fetch')->name('gallery.fetch');
+        Route::get('/galleryss', 'Admin\ImageGaleryController@delete')->name('gallery.delete');
+
+    });
 
 
 
