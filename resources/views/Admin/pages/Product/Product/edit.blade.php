@@ -80,12 +80,6 @@
                                     <input type="text" class="form-control" name="product_code"   value="{{ $product->product_code }}">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <label for="price">   Fiyat : (m<sup>2</sup>) fiyatı  </label>
-                                    <input type="number" class="form-control" step="0.01"  min="0" name="price"   value="{{$product->price}}">
-                                </div>
-                            </div>
 
                         </div>{{--end row--}}
                         <div class="row">
@@ -147,10 +141,7 @@
                                         <label class="rdiobox"><input  name="stock" {{$product->stock==0?'checked':''}}  type="radio" value="0"> <span>Ürün Yok</span></label>
                                     </div>
                                 </div>
-
                             </div>
-
-
                         </div>
                     </div>{{--end row--}}
                     </div>

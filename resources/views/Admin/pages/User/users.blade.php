@@ -36,7 +36,7 @@
                                   <tr>
                                       <td>{{$user->name}}</td>
                                       <td>{{$user->email}}</td>
-                                      <td>{{$user->phone}}</td>
+                                      <td> ---- </td>
                                       <td>{{date('d-m-Y',strtotime($user->created_at) ) }}</td>
                                       <td>
                                           <div class="btn-icon-list">

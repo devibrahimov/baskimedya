@@ -13,7 +13,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <div class="col-sm-6 col-md-3 mg-t-10 mg-sm-t-0">
-                            <a href="{{route('services.create')}}" class="btn btn-success btn-with-icon btn-block"><i class="typcn typcn-pen"></i> Yeni Ekle</a>
+                            <a href="{{route('slider.create')}}" class="btn btn-success btn-with-icon btn-block"><i class="typcn typcn-pen"></i> Yeni Ekle</a>
                         </div>
                     </div>
 
@@ -23,29 +23,32 @@
                         <table class="table text-md-nowrap" id="example1">
                             <thead>
                             <tr>
-                                <th class="wd-5p border-bottom-0">İd</th>
-                                <th class="wd-25p border-bottom-0">Hizmet</th>
-                                <th class="wd-25p border-bottom-0">Başlık</th>
+                                <th class="wd-5p border-bottom-0">Sıra</th>
+                                <th class="wd-40p border-bottom-0">Slider Resimi</th>
+                                <th class="wd-20p border-bottom-0">Başlık</th>
                                 <th class="wd-20p border-bottom-0">Oluşturulma tarihi</th>
                                 <th class="wd-15p border-bottom-0">İşlemler</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            @if(isset($services))
-                                @foreach($services as $service)
+                            @if(isset($sliders))
+                                @foreach($sliders as $slider)
                                     <tr>
-                                        <td>{{$service->id}}</td>
-                                        <td> {{$service->name}} </td>
-                                        <td>{{$service->header}}</td>
-                                        <td>{{$service->created_at}}</td>
+                                        <td>{{$slider->queue}}</td>
+                                        <td style="height:200px;  background: url('/storage/uploads/thumbnail/slider/medium/{{$slider->image}}') no-repeat;
+                                            background-size: cover;background-position: center center !important;">
+
+                                        </td>
+                                        <td>{{$slider->header}}</td>
+                                        <td>{{$slider->created_at}}</td>
 {{--                                        <td>{{date('d-m-Y',strtotime($user->created_at) ) }}</td>--}}
                                         <td>
                                             <div class="btn-icon-list">
                                                 {{--                                              <a href="#" class="btn btn-indigo btn-icon"><i class="typcn typcn-eye"></i></a>--}}
-                                                <a href="{{route('services.edit',$service->id)}}" class="btn btn-primary btn-icon"><i class="typcn typcn-edit"></i></a>
+                                                <a href="{{route('slider.edit',$slider->id)}}" class="btn btn-primary btn-icon"><i class="typcn typcn-edit"></i></a>
 
-                                                <form class="btn btn-danger btn-icon" action="{{route('services.destroy',$service->id)}}" method="post">
+                                                <form class="btn btn-danger btn-icon" action="{{route('slider.destroy',$slider->id)}}" method="post">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
                                                     <button class="btn btn-danger btn-icon" ><i class="typcn typcn-trash"></i></button>

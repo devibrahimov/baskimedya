@@ -41,6 +41,7 @@ Route::group(['middleware'=>['auth'] ,'prefix'=>'yonetim' ] , function (){   //'
         Route::resource('/about','Admin\AboutController') ;
         Route::resource('/setting','Admin\SettingController') ;
         Route::resource('/services','Admin\ServicesController') ;
+        Route::resource('/slider','Admin\SliderController') ;
         Route::resource('/gallery','Admin\ImageGaleryController') ;
         Route::resource('/information','Admin\InformationController') ;
         Route::resource('/category','Admin\Product\CategoryController') ;
@@ -79,16 +80,33 @@ Route::group(['middleware'=>['auth'] ,'prefix'=>'yonetim' ] , function (){   //'
 
 
     Route::get('/','Site\SiteController@index')->name('site.index');
-
     Route::get('/hakkımızda','Site\AboutController@index')->name('site.about') ;
     Route::get('/urunler','Site\Product\ProductsController@index')->name('site.product');
-    Route::get('/{id}/{slug}',['as'=>'showProducts','uses'=>'Site\Product\ProductsController@show']) ;
+    Route::get('product/{id}/{slug}',['as'=>'showProducts','uses'=>'Site\Product\ProductsController@show']) ;
     Route::get('/iletisim','Site\ContactController@index')->name('site.contact');
-    Route::get('/giris','Site\LoginController@index')->name('site.login');
-    Route::get('/kayıt','Site\SignUpController@index')->name('site.signup');
     Route::get('/galeri','Site\GalleryController@index')->name('site.gallery');
+    Route::get('/hizmetlerimiz','Site\SiteController@index')->name('site.services');
+    Route::get('/bilgilendirme' , 'Site\SiteController@information')->name('site.information');
+
+
+
+Route::group([ 'prefix'=>'kullanici' ] , function () {   //'middleware' =>  'admin' ,
+
+    Route::get('/giris','Site\LoginController@index')->name('site.login');
+    Route::post('/giris','Site\LoginController@control');
+    Route::post('/cikis', 'Site\LoginController@logout')->name('site.logout');
+    Route::get('/kayıt','Site\SignUpController@index')->name('site.signup');
+    Route::post('/kayıt','Site\SignUpController@store');
+    Route::post('/districts' , 'ProvincesandDistrictsController@getajaxdistrict')->name('get.districts');
+    Route::get('/aktiflestir/{token}','Site\SignUpController@activate')->name('user.activate');
+});
 /*
 Route::resource('/contact','site\ContactController');
 Route::resource('/about','site\AboutController');*/
 
 
+Route::get('/profil', function(){
+    return view('Site.pages.User.profil');
+//    $user = \App\User::find(1);
+  //  return new  App\Mail\UserRegisterMail($user) ;
+});

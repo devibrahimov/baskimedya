@@ -29,7 +29,6 @@ class ProductValidateRequest extends FormRequest
             'metatitle'=>'required|string|max:150',
             'metadescription'=>'required|string|max:150',
             'product_code'=>'required|string|unique:products|',
-            'price'=>'required|numeric',
             'stock'=>'required|boolean',
             'category'=>'required|numeric'
         ];
@@ -44,7 +43,6 @@ class ProductValidateRequest extends FormRequest
             'metadescription.required'=>'SEO için Meta açıklaması alanını doldurmak zorunludur!',
             'product_code.required'=>'Ürün kodu alanını doldurmak zorunludur!',
             'product_code.unique'=>'Bu ürün kodunu daha önce başka üründe girildi.Ürün kodu ürüne özgün olması gerek!',
-            'price.required'=>'Ürün fiyatı alanını doldurmak zorunludur!',
             'stock.required'=>'Stock Bilgisini Seçmek zorunludur!',
             'category.required'=>'Ürün Kategorisin seçmek zorunludur!'
         ];

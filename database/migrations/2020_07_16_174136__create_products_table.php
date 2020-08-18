@@ -20,7 +20,6 @@ class CreateProductsTable extends Migration
             $table->json('meta');
             $table->string('slug');
             $table->string('product_code');
-            $table->float('price');
             $table->string('image');
             $table->integer('parent_option');
             $table->json('additional_options');

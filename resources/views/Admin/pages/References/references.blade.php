@@ -55,7 +55,7 @@
                         @foreach($references as $reference)
                             <div class="col-xl-3 col-lg-3 col-md-6">
                                 <div class="card text-center">
-                                    <div style="height:200px;background: url('/storage/uploads/thumbnail/references/medium/{{$reference->image}}') no-repeat;
+                                    <div style="height:100px;background: url('/storage/uploads/thumbnail/references/medium/{{$reference->image}}') no-repeat;
                                         background-size: cover;background-position: center center !important;" ></div>
                                         <div class="card-body border-top">
                                             <h4> {{$reference->name}}</h4>

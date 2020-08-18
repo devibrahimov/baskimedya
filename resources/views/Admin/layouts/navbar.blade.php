@@ -2,10 +2,10 @@
     <div class="container-fluid">
         <div class="main-header-left ">
             <div class="responsive-logo">
-                <a href="index.html"><img src="/uploads/setting/{{$setting->logo}}" class="logo-1" alt="logo"></a>
-                <a href="index.html"><img src="/uploads/setting/{{$setting->logo}}" class="dark-logo-1" alt="logo"></a>
-                <a href="index.html"><img src="/admin/img/brand/favicon.png" class="logo-2" alt="logo"></a>
-                <a href="index.html"><img src="/admin/img/brand/favicon.png" class="dark-logo-2" alt="logo"></a>
+                <a href="{{route('site.index')}}"><img src="/uploads/setting/{{$setting->logo}}" class="logo-1" target="_blank" alt="logo"></a>
+                <a href="{{route('site.index')}}"><img src="/uploads/setting/{{$setting->logo}}" class="dark-logo-1" alt="logo"></a>
+                <a href="{{route('site.index')}}"><img src="/admin/img/brand/favicon.png" class="logo-2" alt="logo"></a>
+                <a href="{{route('site.index')}}"><img src="/admin/img/brand/favicon.png" class="dark-logo-2" alt="logo"></a>
             </div>
             <div class="app-sidebar__toggle" data-toggle="sidebar">
                 <a class="open-toggle" href="#"><i class="header-icon fe fe-align-left" ></i></a>
@@ -39,7 +39,7 @@
                             <div class="d-flex wd-100p">
                                 <div class="main-img-user"><img alt="" src="/admin/img/faces/6.jpg" class=""></div>
                                 <div class="ml-3 my-auto">
-                                    <h6>Petey Cruiser</h6><span>Premium Üye</span>
+                                    <h6>{{Auth::user()->name}}</h6><span>@if(Auth::user()->role == 1) Yönetici @endif</span>
                                 </div>
                             </div>
                         </div>

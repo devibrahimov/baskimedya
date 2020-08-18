@@ -23,6 +23,13 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
+      <webServer id="5591c723-d7b0-4b24-ade9-bfad069eb5c5" name="akturkmuzik.com" url="http://diyetisyengulsumyildirim.com">
+        <fileTransfer rootFolder="/public_html" host="diyetisyengulsumyildirim.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

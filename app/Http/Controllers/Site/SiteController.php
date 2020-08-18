@@ -4,7 +4,12 @@ namespace App\Http\Controllers\site;
 
 use App\About;
 use App\Http\Controllers\Controller;
+use App\Information;
+use App\InformationCategory as InfoCat ;
 use App\Product;
+use App\References;
+use App\Service;
+use App\Slider;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -17,10 +22,27 @@ class SiteController extends Controller
     public function index()
     {
         $about = About::first();
-        $products = Product::all();
-        return view('Site.pages.home',compact(['about','products']));
+        $betuls = Slider::all();
+        $products = Product::orderBy('id', 'desc')->take(8)->get();
+        $services = Service::orderBy('id', 'desc')->take(3)->get();
+        $references = References::all();
+        return view('Site.pages.home',compact(['about','products','references','betuls','services']));
     }
 
+
+    public function services()
+    {
+        $about = About::first();
+        $products = Product::all();
+        $references = References::all();
+        return view('Site.pages.home',compact(['about','products','references']));
+    }
+
+    public function information(){
+        $infos = Information::all();
+        $cats = InfoCat::all();
+        return view('Site.pages.Information.index',compact(['cats','infos']));
+    }
     /**
      * Show the form for creating a new resource.
      *

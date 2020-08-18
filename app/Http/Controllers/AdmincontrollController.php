@@ -30,7 +30,7 @@ class AdmincontrollController extends Controller
             ];
 
             return back()->withErrors($error);
-        };
+        }
 
     }
 

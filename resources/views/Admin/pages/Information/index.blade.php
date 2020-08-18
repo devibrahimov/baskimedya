@@ -1,7 +1,7 @@
 @extends('Admin.index')
 
 @section('css')
-    <!---Internal Input tags css-->
+
     <link href="/admin/plugins/inputtags/inputtags.css" rel="stylesheet">
 
 @endsection

@@ -1062,10 +1062,10 @@ button:focus {
     transition: all 0.5s ease 0s;
 }
 .header_wrap:not([class*="bg_"]):not([class*="bg-"]) {
-    background-color: #202325;
+    background-color: #ffffff
 }
 .header_wrap:not([class*="bg_"]):not([class*="bg-"]).transparent_header {
-    background-color:#202325;
+    background-color:#ffffff;
 }
 .header_wrap:not([class*="bg_"]):not([class*="bg-"]).transparent_header.nav-fixed {
     background-color: #fff;
@@ -7200,6 +7200,6 @@ blockquote p:last-child {
   24.END ELEMENT DESIGN
 *===================================*/
 
-.top-header span,.top-header i,.top-header >.ddlabel{
-    color:#ffffff;
-}
+/*.top-header span,.top-header i,.top-header >.ddlabel{*/
+/*    color:#ffffff;*/
+/*}*/

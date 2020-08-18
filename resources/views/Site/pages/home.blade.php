@@ -3,59 +3,97 @@
 
 @section('content')
 
+    @auth
+    <!-- Home Popup Section -->
+    @if(session()->has('mesaj'))
+        <div class="modal fade subscribe_popup" id="onload-popup" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="ion-ios-close-empty"></i></span>
+                        </button>
+                        <div class="row no-gutters">
+                            <div class="col-sm-5">
+                                <div class="background_bg h-100" data-img-src="/assets/images/sendingemail.jpg"></div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="popup_content">
+                                    <div class="popup-text">
+                                        <div class="heading_s4">
+                                            <h4>Kaydınız Başarı ile Gerçekleştirildi</h4>
+                                        </div>
+                                        <p> Baskı Medya takımı olarak sizlere hizmet göstermekten memnuniyyet duyuyoruz</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+    <!-- End Screen Load Popup Section -->
+    @endauth
+
+
+    @if(session()->has('activation'))
+        <div class="modal fade subscribe_popup" id="onload-popup" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="ion-ios-close-empty"></i></span>
+                        </button>
+                        <div class="row no-gutters">
+                            <div class="col-sm-5">
+                                <div class="background_bg h-100" data-img-src="/assets/images/sendingemail.jpg"></div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="popup_content">
+                                    <div class="popup-text">
+                                        <div class="heading_s4">
+                                            <h4>Sayın {{session('activation')['name']}}</h4>
+                                        </div>
+                                        <p>Üye aktivasyon linki <a  style="color: #FF324D" href="{{session('activation')['email']}}">{{session('activation')['email']}}</a> adresine gönderildi. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
+
+
     <!-- START SECTION BANNER -->
     <div class="banner_section full_screen staggered-animation-wrap">
         <div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow carousel_style2" data-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active background_bg overlay_bg_50" data-img-src="assets/images/banner10.jpg">
-                    <div class="banner_slide_content banner_content_inner">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-7 col-md-10">
-                                    <div class="banner_content text_white text-center">
-{{--                                        <h5 class="mb-3 bg_strip staggered-animation text-uppercase" data-animation="fadeInDown" data-animation-delay="0.2s">Starting $90.00</h5>--}}
-                                        <h2 class="staggered-animation" data-animation="fadeInDown" data-animation-delay="0.3s">Uygun Baskının Dijital Merkezi</h2>
-                                        <p class="staggered-animation" data-animation="fadeInUp" data-animation-delay="0.4s">Reklamcılık alanında üretimden montaja 7 seneyi aşkın tecrübemiz ve yenilikçi fikirlerimiz ile firmaların gelişen rekabet ortamına uyum sağlayabilmeleri için çalışıyoruz.</p>
-                                        <a class="btn btn-white staggered-animation" href="shop-left-sidebar.html" data-animation="fadeInUp" data-animation-delay="0.5s">Ürünü İncele</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @foreach($betuls as $slider)
 
-                <div class="carousel-item background_bg overlay_bg_50" data-img-src="assets/images/banner10.jpg">
+
+                <div class="carousel-item @if($loop->first) active @endif background_bg overlay_bg_50" data-img-src="/storage/uploads/thumbnail/slider/large/{{$slider->image}}">
                     <div class="banner_slide_content banner_content_inner">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-7 col-md-10">
                                     <div class="banner_content text_white text-center">
-                                        <h5 class="mb-3 staggered-animation font-weight-light" data-animation="fadeInDown" data-animation-delay="0.2s">Get up to 50% off Today Only!</h5>
-                                        <h2 class="staggered-animation" data-animation="fadeInDown" data-animation-delay="0.3s">Quality Furniture</h2>
-                                        <p class="staggered-animation" data-animation="fadeInUp" data-animation-delay="0.4s">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                        <a class="btn btn-white staggered-animation" href="shop-left-sidebar.html" data-animation="fadeInUp" data-animation-delay="0.4s">Ürünü İncele</a>
+                                        <h5 class="mb-3 staggered-animation font-weight-light" data-animation="fadeInDown" data-animation-delay="0.2s">{{$slider->spamtext}}</h5>
+                                        <h2 class="staggered-animation" data-animation="fadeInDown" data-animation-delay="0.3s">{{$slider->header}}</h2>
+                                        <p class="staggered-animation" data-animation="fadeInUp" data-animation-delay="0.4s"> {{$slider->content}}</p>
+                                        <a class="btn btn-white staggered-animation" href="{{$slider->url}}" data-animation="fadeInUp" data-animation-delay="0.5s">İncele</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item background_bg overlay_bg_60" data-img-src="assets/images/banner10.jpg">
-                    <div class="banner_slide_content banner_content_inner">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-7 col-md-10">
-                                    <div class="banner_content text_white text-center">
-                                        <h5 class="mb-3 staggered-animation font-weight-light" data-animation="fadeInDown" data-animation-delay="0.2s">Taking your Viewing Experience to Next Level</h5>
-                                        <h2 class="staggered-animation" data-animation="fadeInDown" data-animation-delay="0.3s">Living Room Collection</h2>
-                                        <p class="staggered-animation" data-animation="fadeInUp" data-animation-delay="0.4s">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                        <a class="btn btn-white staggered-animation" href="shop-left-sidebar.html" data-animation="fadeInUp" data-animation-delay="0.4s">Ürünü İncele</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"><i class="ion-chevron-left"></i></a>
             <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"><i class="ion-chevron-right"></i></a>
@@ -70,7 +108,7 @@
                @if($about != NULL)
                     <div class="col-lg-6">
 
-                        <div class="about_img scene mb-4 mb-lg-0"style="height:400px;  background: url('/uploads/setting/{{$about->image}}') no-repeat;
+                        <div class="about_img scene mb-4 mb-lg-0 "style="height:400px;  background: url('/uploads/setting/{{$about->image}}') no-repeat;
                             background-size: cover;background-position: center center !important;">
 
                         </div>
@@ -86,6 +124,27 @@
             </div>
         </div>
         <!-- END SECTION ABOUT -->
+    <div class="section pb_20 small_pt">
+        <div class="container-fluid px-2">
+            <div class="row no-gutters">
+
+              @foreach($services as $service)
+                  <div class="col-md-4">
+                    <div class=" sale_banner rounded-0">
+                        <div class="card bg-dark text-white hover_effect1  rounded-0" style=" height:250px;  background: url('/storage/uploads/thumbnail/services/medium/{{$service->image}}') no-repeat;
+                            background-size: cover;background-position: center center !important;">
+                             <div class="card-img-overlay " style="background-color:rgba(0, 0, 0, 0.2);">
+                                <h4 class="card-title text-white " style="background-color:rgba(0, 0, 0); padding:10px;">{{$service->name}}</h4>
+                                <p class="card-text  text-white">{{$service->header}}</p>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
 
         <!-- START SECTION SHOP -->
         <div class="section small_pt pb_70">
@@ -149,38 +208,15 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="client_logo carousel_slider owl-carousel owl-theme nav_style3" data-dots="false" data-nav="true" data-margin="30" data-loop="true" data-autoplay="true" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "767":{"items": "4"}, "991":{"items": "5"}}'>
+                            @foreach($references as $ref)
                             <div class="item">
-{{--                                //@foreach($references as $reference)--}}
+
                                 <div class="cl_logo">
-                                    <img src="{{asset('/storage/uploads/thumbnail/references/small/861596885348.jpg')}}" alt="cl_logo"/>
+                                    <img src="/storage/uploads/thumbnail/references/small/{{$ref->image}}" alt="{{$ref->name}}" title="{{$ref->name}}"/>
                                 </div>
-{{--                               // @endforeach--}}
+
                             </div>
-                            <div class="item">
-                                <div class="cl_logo">
-                                    <img src="assets/images/cl_logo2.png" alt="cl_logo"/>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="cl_logo">
-                                    <img src="assets/images/cl_logo3.png" alt="cl_logo"/>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="cl_logo">
-                                    <img src="assets/images/cl_logo4.png" alt="cl_logo"/>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="cl_logo">
-                                    <img src="assets/images/cl_logo5.png" alt="cl_logo"/>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="cl_logo">
-                                    <img src="assets/images/cl_logo6.png" alt="cl_logo"/>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

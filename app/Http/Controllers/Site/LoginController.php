@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginControlRequest;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -15,6 +16,31 @@ class LoginController extends Controller
     public function index()
     {
         return view('Site.pages.Login.login');
+    }
+
+
+    public function control(LoginControlRequest $request)
+    {
+        if(auth()->attempt([
+            'email'=>$request->email,
+            'password'=>$request->passwd,
+            'role'=> 0,
+            'active'=> 1
+        ])){
+            request()->session()->regenerate();
+            return redirect()->intended('/');
+        }else{
+
+
+            return back()->withErrors("Hatalı Email veya Şifre girdiniz ");
+        }
+    }
+
+    public function logout(){
+        auth()->logout();
+        \request()->session()->flush();
+        \request()->session()->regenerate();
+        return redirect()->route('site.index');
     }
 
     /**

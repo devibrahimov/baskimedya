@@ -3,7 +3,14 @@
 namespace App\Http\Controllers\site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRegisterRequest;
+use App\Mail\UserRegisterMail;
+use App\Province;
+use App\User;
+use App\UserInform;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class SignUpController extends Controller
 {
@@ -14,7 +21,8 @@ class SignUpController extends Controller
      */
     public function index()
     {
-        return view('Site.pages.Login.signup');
+        $provinces = Province::all();
+        return view('Site.pages.Login.signuplast',compact(['provinces']));
     }
 
     /**
@@ -33,11 +41,64 @@ class SignUpController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRegisterRequest $request)
     {
-        //
+
+        # KULLANIICI BILGILERI ILKIN VERILER USERS TABLOSUNE GERI AKALANLARI ISE
+        # USER_INFORMATIONS ABLOSUNA KAYDOLACAKTIR
+        #KAYIT ISHLEMI BASHARILI OLDUKTAN SONRA EMAIL VERIFIED EDILECEKTIR
+        # VE SITENIN ANA SAYFASINA YONLENDIRILECEKTIR
+
+        #EMAILDEN VERILEN LINK ISE SITEYE OUTO LOGIN YAPTIRARAK ANA SAYFAYA YONLRDIRECEKTIR
+
+        $user = new User();
+
+        $user->name = request('name');
+        $user->surname = request('surname');
+        $user->email = request('email');
+        $user->password = Hash::make(request('password'));
+        $user->email_verified_at =  now();
+        $user->token =  md5(random_int(1,600));
+        $user->role = 0;
+
+        $user->save();
+        $userlastid = $user->id ;
+        $userinform= new UserInform();
+
+        $userinform->user_id =  $userlastid;
+        $userinform->company_name = $request->company_name ;
+        $userinform->user_province = $request->province ;
+        $userinform->user_district = $request->district ;
+        $userinform->gsm = $request->gsm ;
+        $userinform->gsm2 = $request->gsm2 ;
+        $userinform->phone = $request->phone ;
+        $userinform->phone2 = $request->phone2 ;
+        $userinform->save();
+
+
+
+
+
+        Mail::to($request->email)->send(new UserRegisterMail($user));
+        $userdata = [
+            'email'=> $user->email,
+            'name'=> $user->name
+        ] ;
+       // auth()->login($user);
+        return redirect()->to('/')->with('activation',$userdata);
+
     }
 
+    public function activate($token){
+        $user = User::where('token','=',$token)->first();
+        if (!is_null($user)){
+            $user->token = null ;
+            $user->active = 1 ;
+            $user->save();
+            auth()->login($user);
+            return redirect()->route('site.index')->with('mesaj','');
+        }
+    }
     /**
      * Display the specified resource.
      *
@@ -82,4 +143,7 @@ class SignUpController extends Controller
     {
         //
     }
+
+
+
 }

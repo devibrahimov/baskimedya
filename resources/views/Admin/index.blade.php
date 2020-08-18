@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
      <!-- Title -->
-    <title>  Reklam Pixel </title>
+    <title>  Baskı Medya </title>
     <!-- Favicon -->
     <link rel="icon" href="/admin/img/brand/favicon.png" type="image/x-icon"/>
     <!-- Icons css -->
@@ -93,7 +93,7 @@
         <!-- /breadcrumb -->
         @if ($errors->any())
             <div class="example">
-                @foreach ($errors->all() as $error)
+                    @foreach ($errors->all() as $error)
 
                     <div class="alert alert-danger border-3 mt-1 mg-b-0" role="alert">
 

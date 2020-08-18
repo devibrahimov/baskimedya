@@ -44,12 +44,7 @@
                                     <input type="text" class="form-control" name="product_code" value="{{old('product_code')}}">
                                 </div>
                              </div>
-                             <div class="col-lg-4 col-xl-4 col-md-6 col-sm-6">
-                                 <div class="form-group">
-                                     <label >   Fiyat : (m<sup>2</sup>) fiyatı  </label>
-                                    <input type="number" class="form-control" step="0.01"  min="0" name="price"  value="{{old('price')}}">
-                                </div>
-                             </div>
+
                              <div class="col-lg-4 col-xl-4 col-md-6 col-sm-6">
                                  <div class="form-group">
                                      <label >Ürün kapak fotoğrafı</label>

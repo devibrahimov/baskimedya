@@ -19,7 +19,7 @@
                             <button type="button" class="btn btn-info-gradient  btn-block" id="submit-all">Yükle</button>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-6">
-                            <a href="{{back()}}" class="btn btn-success-gradient  btn-block" >İşlemi Sonlandır</a>
+                            <a href="{{route('product.index')}}" class="btn btn-success-gradient  btn-block" >İşlemi Sonlandır</a>
                         </div>
                     </div>
                     <div align="center" class="mt-1 mb-2">
@@ -96,7 +96,7 @@
         {
             $.ajax({
                 url:"{{ route('product.imagefetch') }}",
-                data:{  product_id : {{session()->get('id')}}
+                data:{  product_id : {{$id}}
                 },
                 success:function(data)
                 {

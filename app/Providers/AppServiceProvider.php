@@ -30,10 +30,15 @@ class AppServiceProvider extends ServiceProvider
        $infocategory = InformationCategory::all();
        $setting = Setting::first();
 
-        View::share([
-            'infocategory'    => $infocategory ,
-            'setting' => $setting,
+        if($infocategory&&$setting){
 
-        ]);
+            View::share([
+                'infocategory'    => $infocategory ,
+                'setting' => $setting,
+
+            ]);
+
+        }//endif
+
     }
 }

@@ -56,7 +56,6 @@ class ProductController extends Controller
        $product->description = request('description');
        $product->slug = Str::slug( request('name') ) ;
        $product->product_code = request('product_code') ;
-       $product->price = request('price') ;
        $product->stock = request('stock') ;
        $product->category = request('category') ;
        $product->parent_option = request('option') ;
@@ -142,8 +141,7 @@ class ProductController extends Controller
         $product->name = request('name');
         $product->description = request('description');
         $product->slug = Str::slug( request('name') ) ;
-        $product->product_code = request('product_code') ;
-        $product->price = request('price') ;
+        $product->product_code = request('product_code');
         $product->stock = request('stock') ;
         $product->category = request('category') ;
         $product->parent_option = request('option') ;

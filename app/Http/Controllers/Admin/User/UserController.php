@@ -71,7 +71,7 @@ class UserController extends Controller
             'email.unique'=> 'bu Email daha önce kullanıldı.Bir Email tekrar kullanılamaz ',
             'phone.unique'=> 'bu Telefon numarası daha önce kullanıldı.Bir Telefon numarası tekrar kullanılamaz ',
             'phone.number'=> 'Telefon alanında + ve rakamlardan başka karakter kullanamazsınız!',
-            'passwd.required'=>'Şifre alanı gereklidir.Boş bırakamazsınız',
+            'password.required'=>'Şifre alanı gereklidir.Boş bırakamazsınız',
             'rdio.required'=>'Kullanıcı tipi seçmediniz!'
      ]);
         if ($validator->fails()) {

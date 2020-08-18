@@ -20,7 +20,7 @@
                             <input type="text" class="form-control"  id="inputName" name="name" value="{{$user->name}}" placeholder="İsim Soyisim" required>
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control" id="inputName" name="phone" value="{{$user->phone}}" placeholder="Telefon" required>
+                            <input type="number" class="form-control" id="inputName" name="phone" value="" placeholder="Telefon" required>
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-control" id="inputEmail3" name="email" value="{{$user->email}}" placeholder="Email" required>

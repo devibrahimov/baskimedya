@@ -85,7 +85,7 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td> {{$option->name}}</td>
-                                                <td>{{$option->price}}</td>
+                                                <td> </td>
                                                 <td>$450,870</td>
                                             </tr>
                                         @endforeach

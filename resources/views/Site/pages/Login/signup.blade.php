@@ -34,43 +34,70 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-6 col-md-10">
                         <div class="login_wrap">
-                            <div class="padding_eight_all bg-white">
+
+                                <div class="padding_eight_all bg-white">
                                 <div class="heading_s1">
-                                    <h3>Create an Account</h3>
+                                    <h3>Kayıt ol</h3>
                                 </div>
-                                <form method="post">
+
+                                    @if ($errors->any())
+                                        <div class="different_login">
+                                  <span> Hata Mesajı</span>
+                                        </div>
+                                        @foreach ($errors->all() as $error)
+                                            <div class="form-note text-center  " id="hatamesaji" style="color: #FF324D">
+                                                {{$error}}
+                                            </div>
+
+                                        @endforeach
+                                        <div class="different_login">
+
+                                        </div>
+                                    @endif
+
+                                <form method="post" action="{{route('site.signup')}}" role="form" method="post">
                                     <div class="form-group">
-                                        <input type="text" required="" class="form-control" name="name" placeholder="Enter Your Name">
+                                         <label class="form-check-label" for="exampleCheckbox2"><span>İsim Soyisim *</span></label>
+                                        <input type="text" required="" class="form-control" name="name"  value="{{old('name')}}">
+                                    </div>
+                                    @csrf
+                                    <div class="form-group">
+                                         <label class="form-check-label" for="exampleCheckbox2"><span>Email *</span></label>
+                                        <input type="text" required="" class="form-control" name="email" value="{{old('email')}}">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" required="" class="form-control" name="email" placeholder="Enter Your Email">
+                                        <label class="form-check-label" for="exampleCheckbox2"><span>Telefon numaranız *</span></label>
+                                        <input type="number" required="" class="form-control" name="phone" value="{{old('phone')}}" >
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" required="" type="password" name="password" placeholder="Password">
+                                        <label class="form-check-label" for="exampleCheckbox2"><span>Kullanıcı Şifreniz *</span></label>
+                                        <input class="form-control" required="" id="txtPassword" type="password" name="password" value="{{old('password')}}">
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" required="" type="password" name="password" placeholder="Confirm Password">
+
+                                         <label class="form-check-label" for="exampleCheckbox2"><span>Şifreyi Tekrar Girin *</span></label>
+                                        <input class="form-control" id="txtConfirmPassword" required="" type="password" name="password_confirmation"  value="{{old('')}}">
                                     </div>
                                     <div class="login_footer form-group">
-                                        <div class="chek-form">
-                                            <div class="custome-checkbox">
-                                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2" value="">
-                                                <label class="form-check-label" for="exampleCheckbox2"><span>I agree to terms &amp; Policy.</span></label>
-                                            </div>
-                                        </div>
+{{--                                        <div class="chek-form">--}}
+{{--                                            <div class="custome-checkbox">--}}
+{{--                                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2" value="">--}}
+{{--                                                <label class="form-check-label" for="exampleCheckbox2"><span>I agree to terms &amp; Policy.</span></label>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-fill-out btn-block" name="register">Register</button>
+                                        <button type="submit" class="btn btn-fill-out btn-block"   id="btnSubmit"   name="register">Kayıt ol</button>
                                     </div>
                                 </form>
                                 <div class="different_login">
-                                    <span> or</span>
+{{--                                    <span> or</span>--}}
                                 </div>
-                                <ul class="btn-login list_none text-center">
-                                    <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>
-                                    <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
-                                </ul>
-                                <div class="form-note text-center">Already have an account? <a href="login.html">Log in</a></div>
+{{--                                <ul class="btn-login list_none text-center">--}}
+{{--                                    <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>--}}
+{{--                                    <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>--}}
+{{--                                </ul>--}}
+                                <div class="form-note text-center  ">Bir Kullanıcı hesabınız varmıydı? <a href="{{route('site.login')}}">Hesabına Giriş yap</a></div>
                             </div>
                         </div>
                     </div>
@@ -106,4 +133,24 @@
 
 
 
+@endsection
+
+
+
+@section('js')
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+                var password = $("#txtPassword").val();
+                var confirmPassword = $("#txtConfirmPassword").val();
+                if (password != confirmPassword) {
+
+                    var htmlString = "Şifreler Eşleşmiyor.Tekrar deneyin";
+                    $('#hatamesaji').text( htmlString );
+                    return false;
+                }
+                return true;
+            });
+        });
+    </script>
 @endsection

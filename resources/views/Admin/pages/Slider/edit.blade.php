@@ -8,51 +8,67 @@
     <!-- row -->
     <div class="row row-sm">
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+
             <div class="card  box-shadow-0 ">
                 <div class="card-header">
-                    <h4 class="card-title mb-1">Verdiyiniz Hizmetleri buradan ekleyin</h4>
-                    <hr>
+                    <h4 class="card-title mb-1"> Slider Güncelleme Sayfası</h4>
+                    <hr >
                 </div>
                 <div class="card-body pt-0">
-                    <form action="{{route('services.update',$service->id)}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('slider.update',$slider->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <div class="">
+                        <div class="row">
 
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Hizmet adı</label>
-                        <input type="text" class="form-control" name="name" value="{{$service->name}}">
+                            <div class="form-group col-lg-6">
+                                <img src="/storage/uploads/thumbnail/slider/medium/{{$slider->image}}" alt="">
+                            </div>
+                            <div class="form-group col-lg-6">
+                              <div class="row">
+
+                                  <div class="form-group col-lg-9">
+                                      <label for="exampleInputPassword1">Resim</label>
+                                      <input type="file" class="form-control" name="image" >
+                                  </div>
+                                  <div class="form-group col-lg-3">
+                                      <label for="exampleInputPassword1">Sıra</label>
+                                      <input type="number" step="1" class="form-control" name="queue" value="{{$slider->queue}}">
+                                  </div>
+
+
+
+                                  <div class="form-group col-lg-12 mt-3">
+                                      <label for="exampleInputEmail1">Slider üst yazı</label>
+                                      <input type="text" class="form-control" name="spam"  value="{{$slider->spamtext}}">
+                                  </div>
+
+                                  <div class="form-group col-lg-12">
+                                      <label for="exampleInputPassword1">Başlık</label>
+                                      <input type="text" class="form-control" name="header" value="{{$slider->header}}">
+                                  </div>
+
+
+
+                              </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Başlık</label>
-                                <input type="text" class="form-control" name="header" value="{{$service->header}}">
+
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputPassword1">Metin</label>
+                                <input type="text" class="form-control" name="content" value="{{$slider->content}}">
                             </div>
 
-                            @foreach(json_decode($service->meta) as $k=>$v)
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Meta {{$k}}</label>
-                                <input type="text" class="form-control" name="meta{{$k}}" value="{{$v}}">
-                            </div>
-                            @endforeach
-
-
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Resim</label>
-                                <input type="file" class="form-control" name="image">
-                            </div>
-
-                            <div class="form-group">
-
-                                <div class="ql-wrapper ql-wrapper-demo bg-gray-100">
-                                    <textarea name="content" id="content" class="content">{{$service->content}}</textarea>
-                                </div>
+                            <div class="form-group col-lg-12">
+                                <label for="exampleInputPassword1">Yönlendirilecek Sayfa linki</label>
+                                <input type="url" class="form-control" name="url" value="{{$slider->url}}">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3 mb-0">Submit</button>
+                        <button type="submit" class="btn btn-primary mt-3 mb-0">Güncelle</button>
                     </form>
                 </div>
             </div>
+
+
         </div>
     </div>
     <!-- row -->
@@ -61,11 +77,5 @@
 
 
 @section('js')
-    <script src="/admin/ckeditor/ckeditor.js"></script>
-    <script>
-        $(function () {
 
-            CKEDITOR.replace('content')
-        })
-    </script>
 @endsection

@@ -35,12 +35,22 @@
                             <div class="heading_s1">
                                 <h3>Giriş Yap</h3>
                             </div>
-                            <form method="post">
+                            @if ($errors->any())
+
+                                @foreach ($errors->all() as $error)
+                                    <div class="form-note text-center  " id="hatamesaji" style="color: #FF324D">
+                                        {{$error}}
+                                    </div>
+                                @endforeach
+
+                            @endif
+                            <form method="post" action="{{route('site.login')}}">
+                                @csrf
                                 <div class="form-group">
-                                    <input type="text" required="" class="form-control" name="email" placeholder="Your Email">
+                                    <input type="text" required  class="form-control" name="email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" required="" type="password" name="password" placeholder="Password">
+                                    <input class="form-control" required type="password" name="passwd" placeholder="Şifre">
                                 </div>
                                 <div class="login_footer form-group">
                                     <div class="chek-form">
@@ -56,13 +66,13 @@
                                 </div>
                             </form>
                             <div class="different_login">
-                                <span> or</span>
+                                <span> <a href="{{route('site.signup')}}" >kayıt ol</a></span>
                             </div>
-                            <ul class="btn-login list_none text-center">
-                                <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>
-                                <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
-                            </ul>
-                            <div class="form-note text-center">Hesabınız Yok Mu? <a href="{{route('site.signup')}}">Sign up now</a></div>
+{{--                            <ul class="btn-login list_none text-center">--}}
+{{--                                <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>--}}
+{{--                                <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>--}}
+{{--                            </ul>--}}
+
                         </div>
                     </div>
                 </div>

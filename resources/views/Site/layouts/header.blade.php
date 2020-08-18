@@ -1,6 +1,7 @@
 
 <!-- START HEADER -->
 <header class="header_wrap fixed-top header_with_topbar">
+
     <div class="top-header">
         <div class="container">
             <div class="row align-items-center">
@@ -58,6 +59,9 @@
                         </li>
                         <li>
                             <a class="nav-link nav_item" href="{{route('site.about')}}">HAKKIMIZDA</a>
+                        </li>
+                        <li>
+                            <a class="nav-link nav_item" href="{{route('site.services')}}">HİZMETLERİMİZ</a>
                         </li>
                         <li>
                             <a class=" nav-link nav_item" href="{{route('site.gallery')}}">GALERİ</a>

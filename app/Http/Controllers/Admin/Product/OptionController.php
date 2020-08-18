@@ -39,12 +39,18 @@ class OptionController extends Controller
      */
     public function store(Request $request)
     {
+
         $option = new Option();
 
         $option->name = request('name');
         $option->option_code = request('option_code');
         $option->price = request('price');
         $option->parent_id = request('parent_id');
+
+        if( request('stock') == 'on'){
+            $option->stock = 1 ;
+        }
+
         $option->save();
         return back();
     }
@@ -87,6 +93,8 @@ class OptionController extends Controller
         $option->option_code = request('option_code');
         $option->price = request('price');
         $option->parent_id = request('parent_id');
+        if( request('stock') == 'on'){  $option->stock = 1 ; }
+        if( request('stock') != 'on'){  $option->stock = 0 ; }
         $option->save();
         return back();
     }

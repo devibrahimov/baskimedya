@@ -143,6 +143,4 @@
 <!-- Switcher js -->
 <script src="/admin/switcher/js/switcher.js"></script>
 </body>
-
-<!-- Mirrored from laravel.spruko.com/valex/leftmenu-light-ltr/signin by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 08 Jul 2020 16:28:51 GMT -->
-</html>
+ </html>

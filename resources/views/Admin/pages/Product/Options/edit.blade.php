@@ -32,8 +32,8 @@
                                 <label for="exampleInputEmail1">Seçenek fiyatı</label>
                                 <input type="text" class="form-control" name="price"  value="{{$option->price}}">
                             </div>
-                            <div class="form-group col-lg-3 col-xl-3 col-md-12 col-sm-12">
-                                <label for="exampleInputEmail1">Seçenek fiyatı</label>
+                            <div class="form-group col-lg-2 col-xl-2 col-md-12 col-sm-12">
+                                <label for="exampleInputEmail1">Fiyatı</label>
                             <select  class="form-control" name="parent_id">
                                <option value="">Seçenek Kategorisi</option>
                                 @foreach($parents as $parent)
@@ -41,6 +41,13 @@
                                 <option  {{$option->parent_id == $parent->id ? 'selected': ''}}  value="{{$parent->id}}">{{$parent->name}}</option>
                                 @endforeach
                            </select>
+                            </div>
+
+                            <div class="form-group col-lg-1 col-xl-1 col-md-12 col-sm-12">
+                                <label for="exampleInputEmail1">Stok</label>
+
+                                <input class="main-toggle main-toggle-success " type="checkbox" @if($option->stock == 1){{'checked'}} @endif data-toggle="toggle" name="stock" />
+
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success mt-3 mb-0">Kaydet</button>
