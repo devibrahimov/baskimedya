@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Middleware\admin;
+use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //
-//Route::middleware('admin')->group(function (){
-//
-//});
-//
-//Route::get('/admin', function(){
-//    return view('admin.pages.home');
-//});
+
 
 Route::group([ 'prefix'=>'login' ] , function () {   //'middleware' =>  'admin' ,
 
@@ -31,7 +25,7 @@ Route::group([ 'prefix'=>'login' ] , function () {   //'middleware' =>  'admin' 
 });
 
 
-Route::group(['middleware'=>['auth'] ,'prefix'=>'yonetim' ] , function (){   //'middleware' =>  'admin' ,
+Route::group(['middleware'=>['admin'] ,'prefix'=>'yonetim' ] , function (){   //'middleware' =>  'admin' ,
 
          Route::get('/','Admin\AdminController@index')->name('admin.home') ;
 
@@ -90,7 +84,7 @@ Route::group(['middleware'=>['auth'] ,'prefix'=>'yonetim' ] , function (){   //'
 
 
 
-Route::group([ 'prefix'=>'kullanici' ] , function () {   //'middleware' =>  'admin' ,
+Route::group([ 'prefix'=>'kullanici' ] , function () {
 
     Route::get('/giris','Site\LoginController@index')->name('site.login');
     Route::post('/giris','Site\LoginController@control');
@@ -99,6 +93,12 @@ Route::group([ 'prefix'=>'kullanici' ] , function () {   //'middleware' =>  'adm
     Route::post('/kayıt','Site\SignUpController@store');
     Route::post('/districts' , 'ProvincesandDistrictsController@getajaxdistrict')->name('get.districts');
     Route::get('/aktiflestir/{token}','Site\SignUpController@activate')->name('user.activate');
+
+    //auth
+
+    Route::group(['middleware'=>['auth']] , function () {
+        Route::get('/profil/{id}{slug}', 'Site\UserController@index')->name('user.profil');
+    });
 });
 /*
 Route::resource('/contact','site\ContactController');

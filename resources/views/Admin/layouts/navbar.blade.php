@@ -31,7 +31,12 @@
                         </div>
                     </form>
                 </div>
+                <div class="dropdown nav-item main-header-notification show">
 
+
+ <a href="{{route('site.index')}} " target="_blank"  > <i class="bx bx-home-circle"> </i> </a>
+
+                </div>
                 <div class="dropdown main-profile-menu nav nav-item nav-link">
                     <a class="profile-user d-flex" href="#"><img alt="" src="/admin/img/faces/6.jpg"></a>
                     <div class="dropdown-menu">
@@ -39,7 +44,7 @@
                             <div class="d-flex wd-100p">
                                 <div class="main-img-user"><img alt="" src="/admin/img/faces/6.jpg" class=""></div>
                                 <div class="ml-3 my-auto">
-                                    <h6>{{Auth::user()->name}}</h6><span>@if(Auth::user()->role == 1) Yönetici @endif</span>
+                                    <h6>{{Auth::guard('admin')->user()->name}}</h6><span>@if(Auth::guard('admin')->user()->role == 1) Yönetici @endif</span>
                                 </div>
                             </div>
                         </div>
@@ -50,6 +55,9 @@
                         <a class="dropdown-item" href="#"><i class="bx bx-slider-alt"></i> Hesap Ayarları</a>
 <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('form-submit').submit()"><i class="bx bx-log-out"></i> Çıkış Yap</a>
 
+                        <form action="{{route('admin.logout')}}" method="post" id="form-submit" style="display: hidden;">
+                            @csrf
+                        </form>
                     </div>
                 </div>
 
@@ -59,6 +67,3 @@
 </div>
 
 
-<form action="{{route('admin.logout')}}" method="post" id="form-submit" style="display: none;">
-    @csrf
-</form>

@@ -24,7 +24,7 @@ class LoginController extends Controller
         if(auth()->attempt([
             'email'=>$request->email,
             'password'=>$request->passwd,
-            'role'=> 0,
+           // 'role'=> 0,
             'active'=> 1
         ])){
             request()->session()->regenerate();
@@ -38,8 +38,8 @@ class LoginController extends Controller
 
     public function logout(){
         auth()->logout();
-        \request()->session()->flush();
-        \request()->session()->regenerate();
+//        \request()->session()->flush();
+//        \request()->session()->regenerate();
         return redirect()->route('site.index');
     }
 

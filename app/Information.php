@@ -14,4 +14,5 @@ class Information extends Model
     return $this->belongsTo('App\informationCategory','InformationCats_id');
  }
 
+
 }
