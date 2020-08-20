@@ -15,7 +15,14 @@ class CreateTableBasket extends Migration
     {
         Schema::create('basket', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+        });
+
+        Schema::table('basket', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 
