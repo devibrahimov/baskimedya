@@ -9,6 +9,7 @@ use App\Province;
 use App\User;
 use App\UserInform;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -89,16 +90,29 @@ class SignUpController extends Controller
 
     }
 
-    public function activate($token){
-        $user = User::where('token','=',$token)->first();
-        if (!is_null($user)){
-            $user->token = null ;
-            $user->active = 1 ;
-            $user->save();
-            auth()->login($user);
-            return redirect()->route('site.index')->with('mesaj','');
-        }
+
+    public function updateinform(Request $request){
+
+        $userid = $request->uid;
+        $user = User::find($userid);
+
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->email = $request->email;
+
+        $user->save();
+        $userinformid =  $request->unfid;
+        $userinform= UserInform::find($userinformid);
+        $userinform->user_province = $request->province ;
+        $userinform->user_district = $request->district ;
+        $userinform->gsm = $request->gsm ;
+        $userinform->gsm2 = $request->gsm2 ;
+        $userinform->phone = $request->phone ;
+        $userinform->phone2 = $request->phone2 ;
+        $userinform->save();
+         return back();
     }
+
     /**
      * Display the specified resource.
      *
@@ -130,7 +144,7 @@ class SignUpController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -145,5 +159,14 @@ class SignUpController extends Controller
     }
 
 
-
+    public function activate($token){
+        $user = User::where('token','=',$token)->first();
+        if (!is_null($user)){
+            $user->token = null ;
+            $user->active = 1 ;
+            $user->save();
+            auth()->login($user);
+            return redirect()->route('site.index')->with('mesaj','');
+        }
+    }
 }

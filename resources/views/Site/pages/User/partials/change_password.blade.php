@@ -26,7 +26,7 @@
                         </div>
                         <p>Şifrizi unutduysanız Yönetici ile iletişime geçiniz </p>
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-fill-out" name="submit" value="Submit"> Şifreni Güncelle</button>
+                            <button type="submit" class="btn btn-fill-out" name="change_password" value="Submit"> Şifreni Güncelle</button>
                         </div>
                     </div>
                 </div>
