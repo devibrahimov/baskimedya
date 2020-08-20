@@ -97,7 +97,8 @@ Route::group([ 'prefix'=>'kullanici' ] , function () {
     //auth
 
     Route::group(['middleware'=>['auth']] , function () {
-        Route::get('/profil/{id}{slug}', 'Site\UserController@index')->name('user.profil');
+        Route::get('/{slug}/{id}', 'Site\UserController@index')->name('user.profil');
+         Route::post('/changepassword', 'Site\UserController@changepassword')->name('password.change');
     });
 });
 /*

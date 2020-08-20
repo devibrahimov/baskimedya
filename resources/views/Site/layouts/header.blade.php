@@ -34,12 +34,18 @@
                                     @endif
 
                                     <li>
-                                        <a href="{{route('user.profil',[Auth::user()->id , \Illuminate\Support\Str::slug(Auth::user()->name)])}}" ><i class="ti-user"></i><span>{{Auth::user()->name}}</span></a>
+                                        <a href="{{route( 'user.profil',[Str::slug(Auth::user()->name),\Illuminate\Support\Facades\Crypt::encrypt(Auth::user()->id) ] )}}" ><i class="ti-user"></i><span>{{Auth::user()->name}}</span></a>
+
+{{--                                        <a href="{{route('user.profil',[Auth::user()->id , \Illuminate\Support\Str::slug(Auth::user()->name)])}}" ><i class="ti-user"></i><span>{{Auth::user()->name}}</span></a>--}}
                                     </li>
                                     <li><a href="#"  onclick="event.preventDefault(); document.getElementById('form-submit').submit()"> <i class="ti-shift-left-alt"></i><span >Çıkış yap</span></a></li>
                                     <form action="{{route('site.logout')}}" method="post" id="form-submit" style="display: none;">
                                         @csrf
                                     </form>
+{{--                                    <form action="{{route('user.profil')}}" method="post" id="u-submit" style="display: none;">--}}
+{{--                                        @csrf--}}
+{{--                                        <input type="hidden" name="unm" value="{{\Illuminate\Support\Facades\Crypt::encrypt(Auth::user()->id)}}">--}}
+{{--                                    </form>--}}
                                 </ul>
                             @endauth
 
@@ -63,11 +69,12 @@
                         <li>
                             <a class="nav-link nav_item" href="{{route('site.index')}}">ANA SAYFA</a>
                         </li>
-                        <li>
-                            <a class="nav-link nav_item" href="{{route('site.product')}}">ÜRÜNLERİMİZ</a>
-                        </li>
+
                         <li>
                             <a class="nav-link nav_item" href="{{route('site.about')}}">HAKKIMIZDA</a>
+                        </li>
+                        <li>
+                            <a class="nav-link nav_item" href="{{route('site.product')}}">ÜRÜNLERİMİZ</a>
                         </li>
                         <li>
                             <a class="nav-link nav_item" href="{{route('site.services')}}">HİZMETLERİMİZ</a>

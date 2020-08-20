@@ -1,8 +1,10 @@
 <?php
 
 $instajson= file_get_contents('https://www.instagram.com/tiryakioglupixelreklam/?__a=1');
-if(isset($instajson))
+if(isset($instajson)){
+
     $instadata = json_decode($instajson,true);
+}
 $image[]='';
 ?>
 

@@ -1,9 +1,9 @@
 <div class="card">
     <div class="card-header">
-        <h3>Account Details</h3>
+        <h3> Kullanıcı Bilgileri</h3>
     </div>
     <div class="card-body">
-        <p>Already have an account? <a href="#">Log in instead!</a></p>
+        <p>{{$user->company_name}} bilgilerinizi buradan güncelleye bilirsiniz </p>
         <form method="post" action="{{route('site.signup')}}" role="form" method="post">
             <div class="row">
 

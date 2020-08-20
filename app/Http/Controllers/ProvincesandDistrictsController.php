@@ -12,8 +12,7 @@ class ProvincesandDistrictsController extends Controller
 
     public function getajaxdistrict(Request $request)
     {
-
-        if ($request->provinceid) {
+        if ($request->provinceno) {
 
             $selected_provience = $request->provinceno;
 
@@ -23,15 +22,15 @@ class ProvincesandDistrictsController extends Controller
 
             $districts = '';
 
-
+            $selected = '';
             foreach ($dbdata as  $district) {
 
             if ($district->district_no == $select_district){
-
-               $selected = 'selected';
+               $selected = 'selected ';
                 }
 
-             $districts .= '<option ' . $selected . ' value="' . $district->district_no . '">' . $district->name . '</option>';
+                $districts .= '<option ' . $selected . '  value="' . $district->district_no . '">' . $district->name . '</option>';
+                $selected = '';
             }
 
 

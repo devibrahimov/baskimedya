@@ -6,26 +6,7 @@
 
 @section('content')
 
-    <!-- START SECTION BREADCRUMB -->
-    <div class="breadcrumb_section bg_gray page-title-mini">
-        <div class="container"><!-- STRART CONTAINER -->
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="page-title">
-                        <h1>My Account</h1>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <ol class="breadcrumb justify-content-md-end">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li class="breadcrumb-item active">My Account</li>
-                    </ol>
-                </div>
-            </div>
-        </div><!-- END CONTAINER-->
-    </div>
-    <!-- END SECTION BREADCRUMB -->
+   @include('Site.partials.bread')
 
     <!-- START MAIN CONTENT -->
     <div class="main_content">
@@ -50,7 +31,7 @@
                                     <a class="nav-link" id="account-detail-tab" data-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="ti-id-badge"></i>Account details</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="login.html"><i class="ti-lock"></i>Logout</a>
+                                    <a class="nav-link" id="address-tab" data-toggle="tab" href="#password" role="tab" aria-controls="address" aria-selected="true"><i class="ti-lock"></i>Şifrenizi Güncelleyin</a>
                                 </li>
                             </ul>
                         </div>
@@ -133,8 +114,13 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
                                 @include('Site.pages.User.partials.account_detail')
+                            </div>
+
+                            <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="account-detail-tab">
+                                @include('Site.pages.User.partials.change_password')
                             </div>
                         </div>
                     </div>
@@ -175,16 +161,17 @@
 @section('js')
     <script type="text/javascript">
         $(function () {
-            var selectedid = $( "#province option:selected" ).val();
+            var province_no = $( "#province option:selected" ).val();
 
-            if (selectedid){
-                console.log(selectedid);
+            if (province_no){
+                console.log(province_no);
 
                 $.ajax({ /* AJAX REQUEST */
                     type: 'post',
                     url: "{{ route('get.districts') }}",
                     data: {
-                        'selectedid' : selectedid,
+                        'provinceno': province_no,
+                        'district_no' : {{$user->user_district}},
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function(data) {
@@ -205,10 +192,10 @@
                     url: "{{ route('get.districts') }}",
                     data: {
                         'provinceno': province_no,
-                        'district_no' : {{$user->user_district}},
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function(data) {
+
                         $('#districts').html(data);
                     }
                 });
