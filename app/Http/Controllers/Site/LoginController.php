@@ -24,7 +24,7 @@ class LoginController extends Controller
         if(auth()->attempt([
             'email'=>$request->email,
             'password'=>$request->passwd,
-           // 'role'=> 0,
+            'role'=> 0,
             'active'=> 1
         ])){
             request()->session()->regenerate();
