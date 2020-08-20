@@ -2,36 +2,70 @@
 
 @section('content')
 
-    <!-- START SECTION BREADCRUMB -->
-    <div class="breadcrumb_section bg_gray page-title-mini">
-        <div class="container"><!-- STRART CONTAINER -->
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="page-title">
-                        <h1>Login</h1>
+    @include('Site.partials.bread')
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div class="demo-gallery">
+                        <ul id="aniimated-thumbnials" class="list-unstyled row row-sm">
+                            @foreach($galleries as $gallery)
+                                <li class="col-sm-6 col-lg-2"
+                                    data-responsive="/storage/uploads/gallery/{{$gallery->name}}"
+                                    data-src="/storage/uploads/thumbnail/gallery/large  /{{$gallery->name}}"
+                                    data-sub-html="<h4>Gallery Image 1</h4>">
+                                    <a href="#">
+                                        <img class="img-responsive"
+                                             src="/storage/uploads/thumbnail/gallery/small/{{$gallery->name}}"
+                                             alt="Thumb-1">
+                                    </a>
+                                </li>
+                            @endforeach
+
+
+
+                        </ul>
+                        <!-- /Gallery -->
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <ol class="breadcrumb justify-content-md-end">
-                        <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li class="breadcrumb-item active">Giriş Yap</li>
-                    </ol>
+            </div>
+
+            @foreach($galleries as $gallery)
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" id="aniimated-thumbnials" >
+                        <img width="100%" height="225"
+                             src="/storage/uploads/thumbnail/gallery/medium/{{$gallery->name}}">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div><!-- END CONTAINER-->
-    </div>
-    <!-- END SECTION BREADCRUMB -->
-
-
-    <!-- START LOGIN SECTION -->
-    <div class="login_register_wrap section">
-        <div class="container">
-            <div class="row justify-content-center">
-
-            </div>
+            @endforeach
         </div>
     </div>
-    <!-- END LOGIN SECTION -->
+@endsection
+
+@section('css')
+
+
+    <link rel="stylesheet" href="/admin/plugins/sumoselect/sumoselect.css"/>
+
+    <link href="/admin/plugins/gallery/gallery.css" rel="stylesheet"/>
+@endsection
+
+@section('js')
+
+    <!-- Internal Gallery js -->
+    <script src="/admin/plugins/gallery/lightgallery-all.min.js"></script>
+    <script src="/admin/plugins/gallery/jquery.mousewheel.min.js"></script>
+
+    <script>
+        $('#aniimated-thumbnials').lightGallery({
+            thumbnail: true,
+            animateThumb: false,
+            showThumbByDefault: false
+        });
+    </script>
 
 @endsection

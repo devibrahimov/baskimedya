@@ -4,6 +4,7 @@ namespace App\Http\Controllers\site;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Gallery;
 
 class GalleryController extends Controller
 {
@@ -14,7 +15,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        return view('Site.pages.Gallery.index');
+        $galleries = Gallery::all();
+        return view('Site.pages.Gallery.index',compact(['galleries']));
     }
 
     /**

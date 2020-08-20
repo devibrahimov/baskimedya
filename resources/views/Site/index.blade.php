@@ -33,6 +33,12 @@ $image[]='';
     <!-- Icon Font CSS -->
 
     <link rel="stylesheet" href="/assets/css/web.css">
+
+
+
+    <link rel="stylesheet" href="/admin/plugins/sumoselect/sumoselect.css"/>
+
+    <link href="/admin/plugins/gallery/gallery.css" rel="stylesheet"/>
 </head>
 
 <body>
