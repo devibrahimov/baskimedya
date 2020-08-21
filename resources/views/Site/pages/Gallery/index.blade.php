@@ -3,6 +3,47 @@
 @section('content')
 
     @include('Site.partials.bread')
+<<<<<<< HEAD
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div class="demo-gallery">
+                        <ul id="aniimated-thumbnials" class="list-unstyled row row-sm">
+                            @foreach($galleries as $gallery)
+                                <li class="col-sm-6 col-lg-2"
+                                    data-responsive="/storage/uploads/gallery/{{$gallery->name}}"
+                                    data-src="/storage/uploads/thumbnail/gallery/large  /{{$gallery->name}}"
+                                    data-sub-html="<h4>Gallery Image 1</h4>">
+                                    <a href="#">
+                                        <img class="img-responsive"
+                                             src="/storage/uploads/thumbnail/gallery/small/{{$gallery->name}}"
+                                             alt="Thumb-1">
+                                    </a>
+                                </li>
+                            @endforeach
+
+                        </ul>
+                        <!-- /Gallery -->
+                    </div>
+                </div>
+            </div>
+
+            @foreach($galleries as $gallery)
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" id="aniimated-thumbnials" >
+                        <img width="100%" height="225"
+                             src="/storage/uploads/thumbnail/gallery/medium/{{$gallery->name}}">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+=======
  <div class="section">
      <div class="container">
          <div class="row">
@@ -38,6 +79,7 @@
          </div>
      </div>
  </div>
+>>>>>>> origin/zahidinho
 @endsection
 
 @section('css')

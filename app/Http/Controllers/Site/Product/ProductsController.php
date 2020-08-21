@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\site\Product;
 
 use App\AdditionalOption;
+use App\Basket;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\ProductImage;
 use Illuminate\Http\Request;
+use Session;
 
 class ProductsController extends Controller
 {
@@ -88,5 +90,19 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    // ADD TO CART
+
+    public function addToCart(Request $request, $id){
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $basket = new Basket($oldCart);
+        $basket->add($product,$product->id);
+
+        $request->session()->put('cart',$basket);
+        dd($request->session()->get('cart'));
+        return redirect()->route('site.product');
     }
 }

@@ -46,6 +46,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="pr_detail">
                             <div class="product_description">
+{{--                                @dd($product);--}}
                                 <h4 class="product_title"><a href="#">{{$product->name}}</a></h4>
                                 <div class="product_price">
                                     <span class="price">${{$product->price}}</span>
@@ -212,9 +213,10 @@
                                     <input type="button" value="+" class="plus">
                                 </div>
                             </div>
-                            <div class="cart_btn">
-                                <button class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Sepete Ekle</button>
-
+                            <div class="cart_btn" href="{{route('site.addToCart',['id'=>$product->id])}}">
+                                <a href="{{route('site.addToCart',['id'=>$product->id])}}">
+                                <button class="btn btn-fill-out btn-addtocart" type="submit" ><i class="icon-basket-loaded"></i> Sepete Ekle</button>
+                                </a>
                             </div>
                         </div>
 
