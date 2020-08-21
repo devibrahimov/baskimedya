@@ -97,6 +97,7 @@ Route::group([ 'prefix'=>'kullanici' ] , function () {
     Route::get('/aktiflestir/{token}','Site\SignUpController@activate')->name('user.activate');
 
     //auth
+    Route::get('/sepet', 'Site\Product\BasketController@index');
 
     Route::group(['middleware'=>['auth']] , function () {
         Route::get('/{slug}/{id}', 'Site\UserController@index')->name('user.profil');

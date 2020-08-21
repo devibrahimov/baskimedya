@@ -20,7 +20,7 @@
                             </div>
                             <div class="contact_text">
                                 <span>Adres</span>
-                                <p>123 Street, Old Trafford, London, UK</p>
+                                <p>{{$setting?$setting->address : '' }}</p>
                             </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                             </div>
                             <div class="contact_text">
                                 <span>Email</span>
-                                <a href="mailto:info@sitename.com">info@yourmail.com </a>
+                                <a href="mailto:info@sitename.com">{{$setting?$setting->email : '' }}</a>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,8 @@
                             </div>
                             <div class="contact_text">
                                 <span>İrtibat</span>
-                                <p>+ 457 789 789 65</p>
+                                <p>{{$setting?$setting->number : '' }} <br>{{$setting?$setting->phone : '' }}</p>
+
                             </div>
                         </div>
                     </div>
@@ -59,24 +60,25 @@
                         <div class="heading_s1">
                             <h2>İletişime Geçin</h2>
                         </div>
-                        <p class="leads">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                        <p class="leads">{{$setting->about?$setting->about : '' }}</p>
                         <div class="field_form">
                             <form method="post" name="enq">
+
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <input required placeholder="Enter Name *" id="first-name" class="form-control" name="name" type="text">
+                                        <input required        placeholder="Adınız *" id="first-name" class="form-control" name="name" type="text">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input required placeholder="Enter Email *" id="email" class="form-control" name="email" type="email">
+                                        <input required        placeholder="Email adresiniz*" id="email" class="form-control" name="email" type="email">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input required placeholder="Enter Phone No. *" id="phone" class="form-control" name="phone">
+                                        <input required        placeholder="Telefon numaranız. *" id="phone" class="form-control" name="phone">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input placeholder="Enter Subject" id="subject" class="form-control" name="subject">
+                                        <input        placeholder="Mesaj başlığı" id="subject" class="form-control" name="subject">
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <textarea required placeholder="Message *" id="description" class="form-control" name="message" rows="4"></textarea>
+                                        <textarea        required placeholder="Masajınız *" id="description" class="form-control" name="message" rows="4"></textarea>
                                     </div>
                                     <div class="col-md-12">
                                         <button type="submit" title="Submit Your Message!" class="btn btn-fill-out" id="submitButton" name="submit" value="Submit">Send Message</button>
@@ -89,7 +91,8 @@
                         </div>
                     </div>
                     <div class="col-lg-6 pt-2 pt-lg-0 mt-4 mt-lg-0">
-                         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12594.230958848679!2d32.491819896288064!3d37.89402425065007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1str!2str!4v1595874623348!5m2!1str!2str" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+                        {!! $setting->map?$setting->map : '' !!}
                     </div>
                 </div>
             </div>

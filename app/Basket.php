@@ -2,6 +2,7 @@
 
 namespace App;
 
+<<<<<<< HEAD
 
 class Basket
 {
@@ -35,4 +36,11 @@ class Basket
    }
 
 
+=======
+use Illuminate\Database\Eloquent\Model;
+
+class Basket extends Model
+{
+    //
+>>>>>>> origin/zahidinho
 }

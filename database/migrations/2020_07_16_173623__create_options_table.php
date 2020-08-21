@@ -18,6 +18,7 @@ class CreateOptionsTable extends Migration
             $table->integer('parent_id')->nullable();
             $table->string('name');
             $table->string('option_code');
+            $table->tinyInteger('stock')->default(0);
             $table->double('price')->nullable();
             $table->timestamps();
         });
