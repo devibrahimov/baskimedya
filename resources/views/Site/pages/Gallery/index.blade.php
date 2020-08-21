@@ -22,8 +22,6 @@
                                 </li>
                             @endforeach
 
-
-
                         </ul>
                         <!-- /Gallery -->
                     </div>
