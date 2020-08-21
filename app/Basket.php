@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Basket extends Model
 {
+    protected $table = 'basket';
     public $items = null;
     public $totalQuantity = 0;
     public $totalPrice = 0;
