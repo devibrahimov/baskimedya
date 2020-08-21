@@ -82,6 +82,8 @@ Route::group(['middleware'=>['admin'] ,'prefix'=>'yonetim' ] , function (){   //
     Route::get('/hizmetlerimiz','Site\ServicesController@index')->name('site.services');
     Route::get('/bilgilendirme' , 'Site\SiteController@information')->name('site.information');
 
+//    ADD TO CART
+    Route::get('add-to-cart/{id}','Site\Product\ProductsController@addToCart')->name('site.addToCart');
 
 
 Route::group([ 'prefix'=>'kullanici' ] , function () {
