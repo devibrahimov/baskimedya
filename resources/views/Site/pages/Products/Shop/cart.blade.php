@@ -25,9 +25,8 @@
                                     <table class="table table-sm font-sm mb-0 mt-2">
                                         <tbody>
                                         <tr>
-                                            <th class="compress text-nowrap">Vinil Menşei</th>
-                                            <td colspan="2">Çin 280gr</td>
-
+                                            <th class="compress text-nowrap">Vinil </th>
+                                            <td colspan="2"> Çin 280gr   </td>
                                         </tr>
                                         <tr>
                                             <th>Ölçüler</th>
@@ -37,8 +36,7 @@
                                                     <tr>
                                                         <th>En</th>
                                                         <th>Boy</th>
-                                                        <th >Alan</th>
-                                                        <th colspan="2">Urun TL Fiyati</th>
+                                                        <th>Alan</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -46,18 +44,15 @@
                                                         <td class="text-nowrap">300 cm</td>
                                                         <td class="text-nowrap">100 cm</td>
                                                         <td class="text-nowrap">
-                                                            <span class="d-block font-weight-bold">
-                                                                3 m<sup>2</sup>
-                                                            </span>
-                                                            <span class="text-muted">(x 9.52 TL = 28.56 TL)</span>
+
+                                                            <span class="text-muted"><strong> 3 m<sup>2</sup></strong>   </span>
                                                         </td>
 
-                                                        <td class="text-monospace text-right">28.56 TL</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
                                             </td>
-
+                                            <td ><strong class=" border-bottom border-dark">Ürün TL fiyatı</strong> </br><p>28.56 TL</p> </td>
                                         </tr>
 
                                         <tr>
@@ -76,13 +71,9 @@
                                             <td class="text-monospace text-right">0.00 TL</td>
                                         </tr>
                                         </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th colspan="2" class="text-right">Toplam</th>
-                                            <th colspan="2" class="text-monospace text-right">50.52 TL</th>
-                                        </tr>
-                                        </tfoot>
+
                                     </table>
+                                   <span class=" text-monospace mt-1  text-sm-left">Ürün Sipariş Kodunuz  - PRVNL0021-CHN280</span>
                                 </td>
                                 <td > 23.54 <sup>₺</sup></td>
                                 <td>
