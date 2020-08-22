@@ -19,23 +19,33 @@
                     <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
                         <div class="product-image">
                             <div class="product_img_box">
-                                <img id="product_img" src='/storage/uploads/thumbnail/products/large/{{$product->image}}' data-zoom-image="/storage/uploads/thumbnail/products/large/{{$product->image}}" alt="product_img1" />
+                                <img id="product_img"
+                                     src='/storage/uploads/thumbnail/products/large/{{$product->image}}'
+                                     data-zoom-image="/storage/uploads/thumbnail/products/large/{{$product->image}}"
+                                     alt="product_img1"/>
                                 <a href="#" class="product_img_zoom" title="Zoom">
                                     <span class="linearicons-zoom-in"></span>
                                 </a>
                             </div>
-                            <div id="pr_item_gallery" class="product_gallery_item slick_slider" data-slides-to-show="4" data-slides-to-scroll="1" data-infinite="false">
+                            <div id="pr_item_gallery" class="product_gallery_item slick_slider" data-slides-to-show="4"
+                                 data-slides-to-scroll="1" data-infinite="false">
                                 <div class="item">
-                                    <a href="#" class="product_gallery_item active" data-image="/storage/uploads/thumbnail/products/large/{{$product->image}}" data-zoom-image="/storage/uploads/thumbnail/products/large/{{$product->image}}">
-                                        <img src="/storage/uploads/thumbnail/products/large/{{$product->image}}" alt="product_small_img1" />
+                                    <a href="#" class="product_gallery_item active"
+                                       data-image="/storage/uploads/thumbnail/products/large/{{$product->image}}"
+                                       data-zoom-image="/storage/uploads/thumbnail/products/large/{{$product->image}}">
+                                        <img src="/storage/uploads/thumbnail/products/large/{{$product->image}}"
+                                             alt="product_small_img1"/>
                                     </a>
                                 </div>
                                 @foreach($images as $img)
-                                <div class="item">
-                                    <a href="#" class="product_gallery_item " data-image="/storage/uploads/thumbnail/products/large/{{$img->name}}" data-zoom-image="/storage/uploads/thumbnail/products/large/{{$img->name}}">
-                                        <img src="/storage/uploads/thumbnail/products/small/{{$img->name}}" alt="product_small_img1" />
-                                    </a>
-                                </div>
+                                    <div class="item">
+                                        <a href="#" class="product_gallery_item "
+                                           data-image="/storage/uploads/thumbnail/products/large/{{$img->name}}"
+                                           data-zoom-image="/storage/uploads/thumbnail/products/large/{{$img->name}}">
+                                            <img src="/storage/uploads/thumbnail/products/small/{{$img->name}}"
+                                                 alt="product_small_img1"/>
+                                        </a>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
@@ -46,7 +56,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="pr_detail">
                             <div class="product_description">
-{{--                                @dd($product);--}}
+                                {{--                                @dd($product);--}}
                                 <h4 class="product_title"><a href="#">{{$product->name}}</a></h4>
                                 <div class="product_price">
                                     <span class="price">${{$product->price}}</span>
@@ -54,7 +64,8 @@
 
                                 </div>
 
-                                <br> <hr>
+                                <br>
+                                <hr>
 
                                 <div class="pr_detail">
                                     <div class="product_description">
@@ -63,19 +74,27 @@
                                         </div>
                                         <br>
                                         <ul class="product-meta d-inline">
-                                            <li class="text-default">Ürün Adı: <a href="{{route('showProducts',[$product->id,$product->slug])}}"> {{$product->name}}</a></li>
-                                            <li class="text-default" >Kategori: <a href="#"> {{ $product->categoryName->name}} </a></li>
-                                            <li class="text-default">Ürün kodu: <a href="{{route('showProducts',[$product->id,$product->slug])}}"> {{$product->product_code}}</a></li>
+                                            <li class="text-default">Ürün Adı: <a
+                                                    href="{{route('showProducts',[$product->id,$product->slug])}}"> {{$product->name}}</a>
+                                            </li>
+                                            <li class="text-default">Kategori: <a
+                                                    href="#"> {{ $product->categoryName->name}} </a></li>
+                                            <li class="text-default">Ürün kodu: <a
+                                                    href="{{route('showProducts',[$product->id,$product->slug])}}"> {{$product->product_code}}</a>
+                                            </li>
 
                                         </ul>
-                                        <hr />
+                                        <hr/>
                                         <div class="product_share">
                                             <span>Paylaş:</span>
                                             <ul class="social_icons">
-                                                <li><a href="#"><i class="ion-social-facebook text-info"> </i> facebook </a></li>
+                                                <li><a href="#"><i class="ion-social-facebook text-info"> </i> facebook
+                                                    </a></li>
                                             </ul>
                                             <ul class="product-meta d-inline">
-                                                <li class="text-default">Ürün Sipariş Kodu :  <a href="{{route('showProducts',[$product->id,$product->slug])}}"> {{$product->product_code}}</a></li>
+                                                <li class="text-default">Ürün Sipariş Kodu : <a
+                                                        href="{{route('showProducts',[$product->id,$product->slug])}}"> {{$product->product_code}}</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -89,23 +108,26 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-{{--                        <p>Seçenekler</p>--}}
+                        {{--                        <p>Seçenekler</p>--}}
 
                         <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th width="5%" scope="col">#</th>
-                                <th width="75%" scope="col">Ürün <br> Malzemesi </th>
+                                <th width="75%" scope="col">Ürün <br> Malzemesi</th>
                                 <th width="15%" scope="col">Stok <br/> Durumu</th>
-                                <th width="15%" scope="col">m <sup>2</sup> <br/>fiyatı </th>
+                                <th width="15%" scope="col">m <sup>2</sup> <br/>fiyatı</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($product->options($product->parent_option) as $option)
                                 <tr>
                                     <th scope="row">
-                                        <div class="custome-checkbox">
-                                            <input class="form-radio-input" type="radio" name="rdio"data-option="{{$option->id}}"  @if($loop->first) {{'checked'}} @endif data-optionprice="{{$option->price}}"  id="exampleRadio3" value="{{$option->id}}">
+                                        <div class="custome-checkbox" name="myForm">
+                                            <input class="form-radio-input" type="radio" name="radios"
+                                                   data-option="{{$option->id}}"
+                                                   @if($loop->first) {{'checked'}} @endif data-optionprice="{{$option->price}}"
+                                                   id="exampleRadio3" value="{{$option->id}}">
                                             <label class="form-radio-label" for="exampleRadio3"> </label>
                                         </div>
                                     </th>
@@ -120,8 +142,8 @@
                     </div>
                     <div class="col-lg-6">
 
-                        <div id="dimensions" class="card shadow-sm mb-4" >
-                            <div class="card-header bg_default text-white"  >
+                        <div id="dimensions" class="card shadow-sm mb-4">
+                            <div class="card-header bg_default text-white">
                                 <h6 class="mb-0 font-weight-bold text-white">Ölçüler</h6>
                             </div>
                             <div class="card-body">
@@ -131,9 +153,11 @@
                                             <label for="width" class="sr-only ">En</label>
                                             <div class="input-group input-group-sm">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg_default text-white font-weight-bold">EN</span>
+                                                    <span
+                                                        class="input-group-text bg_default text-white font-weight-bold">EN</span>
                                                 </div>
-                                                <input type="number" min="1" step="1" id="width" name="width" value="100" class="form-control">
+                                                <input type="number" min="1" step="1" id="width" name="width"
+                                                       value="100" class="form-control">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg_default text-white ">sm</span>
                                                 </div>
@@ -145,9 +169,11 @@
                                             <label for="height" class="sr-only">Boy</label>
                                             <div class="input-group input-group-sm">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text font-weight-bold bg_default text-white ">BOY</span>
+                                                    <span
+                                                        class="input-group-text font-weight-bold bg_default text-white ">BOY</span>
                                                 </div>
-                                                <input type="number" min="1" step="1" id="height" name="height" value="100" class="form-control">
+                                                <input type="number" min="1" step="1" id="height" name="height"
+                                                       value="100" class="form-control">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg_default text-white ">sm</span>
                                                 </div>
@@ -189,13 +215,14 @@
                                 @foreach($options as $key => $option)
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <label class="input-group-text bg_default text-white "  for="inputGroupSelect01">{{$option->name}}</label>
+                                            <label class="input-group-text bg_default text-white "
+                                                   for="inputGroupSelect01">{{$option->name}}</label>
                                         </div>
 
-                                        <select class="custom-select" id="inputGroupSelect01">
-                                            <option value="0"> ----- </option>
+                                        <select class="custom-select" id="inputGroupSelect01" type="secenek">
+                                            <option value="0"> -----</option>
                                             @foreach($product->additionaloption($option->id)  as $opt)
-                                                <option value="{{$opt->id}}">{{$opt->name}}</option>
+                                                <option name="veri" value="{{$opt->id}}">{{$opt->name}}</option>
                                             @endforeach
                                         </select>
 
@@ -215,7 +242,9 @@
                             </div>
                             <div class="cart_btn" href="{{route('site.addToCart',['id'=>$product->id])}}">
                                 <a href="{{route('site.addToCart',['id'=>$product->id])}}">
-                                <button class="btn btn-fill-out btn-addtocart" type="submit" ><i class="icon-basket-loaded"></i> Sepete Ekle</button>
+                                    <button class="btn btn-fill-out btn-addtocart" type="submit"><i
+                                            class="icon-basket-loaded"></i> Sepete Ekle
+                                    </button>
                                 </a>
                             </div>
                         </div>
@@ -228,9 +257,53 @@
         </div>
         <!-- END SECTION SHOP -->
 
-      @include('Site.partials.subscribe')
+        @include('Site.partials.subscribe')
     </div>
     <!-- END MAIN CONTENT -->
 
+
+@endsection
+
+@section('js')
+    <script>
+
+        // URUN MALZEMELESİ
+        $('input[type="radio"]').on('change', function (e) {
+            // var prices = e.target.dataset.optionprice;
+            // console.log(prices)
+        });
+
+        // en boy
+
+        $('input[name="width"]').on('change', function (e) {
+            var en = e.target.value;
+            console.log("EN: ", en)
+        });
+
+        $('input[name="height"]').on('change', function (e) {
+            var boy = e.target.value;
+            console.log("BOY: ", boy)
+        });
+
+        // SECENEKLER
+        $('select[type="secenek"]').on('change', function (e) {
+            var sad = e.target.value;
+            console.log("SECENEKLER: ", sad)
+        });
+
+        //
+        // $('#inputGroupSelect01').change(function (e) {
+        //     var baski = e.target.value;
+        //     //alert($(this).val());
+        //     console.log("Baski: ", baski)
+        // });
+
+        // ADET
+        $('input[name="quantity"]').on('click', function (e) {
+            var adet = e.target.value;
+            console.log("adet: ", adet)
+        });
+
+    </script>
 
 @endsection
