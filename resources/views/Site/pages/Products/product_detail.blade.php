@@ -268,9 +268,12 @@
     <script>
 
         // URUN MALZEMELESİ
+
         $('input[type="radio"]').on('change', function (e) {
-            // var prices = e.target.dataset.optionprice;
-            // console.log(prices)
+            var o = $("option:selected",this);
+            var prices = this.dataset.optionprice;
+             console.log(prices)
+           // Object.freeze(prices);
         });
 
         // en boy
@@ -278,11 +281,13 @@
         $('input[name="width"]').on('change', function (e) {
             var en = e.target.value;
             console.log("EN: ", en)
+            return en;
         });
 
         $('input[name="height"]').on('change', function (e) {
             var boy = e.target.value;
             console.log("BOY: ", boy)
+            return boy;
         });
 
         // SECENEKLER
@@ -302,6 +307,7 @@
         $('input[name="quantity"]').on('click', function (e) {
             var adet = e.target.value;
             console.log("adet: ", adet)
+            Object.freeze(adet);
         });
 
     </script>
