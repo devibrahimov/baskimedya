@@ -2,7 +2,7 @@
 
 // 21.06.2018  Murat Karagöz    https://github.com/muratkaragoz/php_ve_algoritma_ile_tc_kimlik_no_dogrulama
 //******This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. Link: https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
-namespace   \App\Http\Controllers\Helper;
+namespace App\Http\Controllers\Helper;
 
 class TCKimlikNoSinifi {
 
@@ -75,7 +75,7 @@ class TCKimlikNoSinifi {
 
 
 
-    public function TCKimlikNoDogrulaCurl($TCKimlikNo,$Ad,$Soyad,$DogumYil)
+    public function TCKimlikNoDogrulaCurl($TCKimlikNo,$Ad,$Soyad)
     {
         $gonder = '<?xml version="1.0" encoding="utf-8"?>
 			<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -84,7 +84,7 @@ class TCKimlikNoSinifi {
 			<TCKimlikNo>'.$TCKimlikNo.'</TCKimlikNo>
 			<Ad>'.$this->BuyukHarfCevir($Ad).'</Ad>
 			<Soyad>'.$this->BuyukHarfCevir($Soyad).'</Soyad>
-			<DogumYili>'.$DogumYil.'</DogumYili>
+
 			</TCKimlikNoDogrula>
 			</soap:Body>
 			</soap:Envelope>';

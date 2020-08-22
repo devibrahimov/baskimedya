@@ -13,9 +13,18 @@ class CreateCorporativeinformTable extends Migration
      */
     public function up()
     {
-        Schema::create('corporativ_inform', function (Blueprint $table) {
+        Schema::create('company_inform', function (Blueprint $table) {
             $table->id();
+            $table->string('company_name');
+            $table->unsignedBigInteger('user_id');
+            $table->string('address1');
+            $table->string('address2');
+            $table->string('postcode');
+            $table->string('vergino');
+            $table->string('vergidairesi');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -26,6 +35,6 @@ class CreateCorporativeinformTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('corporativ_inform');
+        Schema::dropIfExists('company_inform');
     }
 }

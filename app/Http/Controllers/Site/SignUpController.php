@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Helper\TCKimlikNoSinifi as TCKimlikNoSinifi;
 
 class SignUpController extends Controller
 {
@@ -51,6 +52,11 @@ class SignUpController extends Controller
         # VE SITENIN ANA SAYFASINA YONLENDIRILECEKTIR
 
         #EMAILDEN VERILEN LINK ISE SITEYE OUTO LOGIN YAPTIRARAK ANA SAYFAYA YONLRDIRECEKTIR
+        $tc = new TCKimlikNoSinifi();
+        $tcvalidate = $tc->TCKimlikNoDogrulaCurl($request->passportid,$request->name,$request->surname) ;
+        if (!$tcvalidate){
+            return back()->with('error', 'TC Kimlik Numarasını Yalnış girdiniz');
+        }
 
         $user = new User();
 
@@ -67,7 +73,7 @@ class SignUpController extends Controller
         $userinform= new UserInform();
 
         $userinform->user_id =  $userlastid;
-        $userinform->company_name = $request->company_name ;
+        $userinform->tckimlik = $request->passportid ;
         $userinform->user_province = $request->province ;
         $userinform->user_district = $request->district ;
         $userinform->gsm = $request->gsm ;
@@ -91,27 +97,6 @@ class SignUpController extends Controller
     }
 
 
-    public function updateinform(Request $request){
-
-        $userid = $request->uid;
-        $user = User::find($userid);
-
-        $user->name = $request->name;
-        $user->surname = $request->surname;
-        $user->email = $request->email;
-
-        $user->save();
-        $userinformid =  $request->unfid;
-        $userinform= UserInform::find($userinformid);
-        $userinform->user_province = $request->province ;
-        $userinform->user_district = $request->district ;
-        $userinform->gsm = $request->gsm ;
-        $userinform->gsm2 = $request->gsm2 ;
-        $userinform->phone = $request->phone ;
-        $userinform->phone2 = $request->phone2 ;
-        $userinform->save();
-         return back();
-    }
 
     /**
      * Display the specified resource.

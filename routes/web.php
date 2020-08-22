@@ -103,7 +103,8 @@ Route::group([ 'prefix'=>'kullanici' ] , function () {
         Route::get('/{slug}/{id}', 'Site\UserController@index')->name('user.profil');
 
          Route::post('/changepassword', 'Site\UserController@changepassword')->name('password.change');
-         Route::post('/accountupdate', 'Site\SignUpController@updateinform')->name('user.accountchange');
+         Route::post('/accountupdate', 'Site\UserController@updateinform')->name('user.accountchange');
+        Route::post('/companyupdate', 'Site\UserController@updatecompany')->name('user.companychange');
     });
 });
 /*

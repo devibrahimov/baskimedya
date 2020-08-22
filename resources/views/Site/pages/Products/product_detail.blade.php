@@ -213,6 +213,7 @@
                                     <input type="button" value="+" class="plus">
                                 </div>
                             </div>
+
                             <div class="cart_btn" href="{{route('site.addToCart',['id'=>$product->id])}}">
                                 <a href="{{route('site.addToCart',['id'=>$product->id])}}">
                                 <button class="btn btn-fill-out btn-addtocart" type="submit" ><i class="icon-basket-loaded"></i> Sepete Ekle</button>
@@ -233,4 +234,11 @@
     <!-- END MAIN CONTENT -->
 
 
+@endsection
+
+
+@section('js')
+    <script>
+
+    </script>
 @endsection

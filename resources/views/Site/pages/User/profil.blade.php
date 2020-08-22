@@ -34,7 +34,7 @@
                                     <a class="nav-link" id="account-detail-tab" data-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="ti-id-badge"></i>Hesap Bilgileri</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="address-tab" data-toggle="tab" href="#password" role="tab" aria-controls="address" aria-selected="true"><i class="ti-lock"></i>Şifrenizi Güncelleyin</a>
+                                        <a class="nav-link" id="address-tab" data-toggle="tab" href="#password" role="tab" aria-controls="address" aria-selected="true"><i class="ti-lock"></i>Şifrenizi Güncelleyin</a>
                                 </li>
                             </ul>
                         </div>
