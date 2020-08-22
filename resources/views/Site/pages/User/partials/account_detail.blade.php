@@ -3,7 +3,7 @@
         <h3> Kullanıcı Bilgileri</h3>
     </div>
     <div class="card-body">
-        <p>{{$user->company_name}} bilgilerinizi buradan güncelleye bilirsiniz </p>
+        <p>bilgilerinizi buradan güncelleye bilirsiniz </p>
         <form action="{{route('user.accountchange')}}" role="form" method="post">
 
             <div class="row">
@@ -21,9 +21,13 @@
                         </div>
                         <input type="hidden" name="uid" value="{{$user->user_id}}">
                         <input type="hidden" name="unfid" value="{{$user->id}}">
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             <label>Email Adresi <span class="required">*</span></label>
                             <input required=""  value="{{$user->email}}"  class="form-control" name="email" type="email">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>TC kimlik no: <span class="required">*</span></label>
+                           <h6> <i class="ti-lock"> </i> {{$user->tckimlik}}  </h6>
                         </div>
                         <div class="form-group col-md-6">
                             <label>il <span class="required">*</span></label>
@@ -45,7 +49,7 @@
 
                         <div class="form-group col-md-6">
                             <label>GSM <span class="required">*</span></label>
-                            <input required=""  value="{{$user->gsm}}"  class="form-control" name="gsm" type="number">
+                            <h6> <i class="ti-lock"> </i> {{$user->gsm}}  </h6>
                         </div>
                         @csrf
                         <div class="form-group col-md-6">

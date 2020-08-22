@@ -16,7 +16,13 @@
 
 
     <div class="main_content">
+        @foreach ($errors->all() as $error)
 
+
+                <strong>HATA MESAJI !</strong> {{$error}}
+
+
+    @endforeach
         <!-- START LOGIN SECTION -->
         <div class="login_register_wrap section">
             <div class="container">
@@ -42,9 +48,13 @@
                                                <label>Soyad  <span class="required">*</span></label>
                                                <input required="" class="form-control" name="surname">
                                            </div>
-                                           <div class="form-group col-md-12">
+                                           <div class="form-group col-md-6">
                                                <label>Email Adresi <span class="required">*</span></label>
                                                <input required="" class="form-control" name="email" type="email">
+                                           </div>
+                                           <div class="form-group col-md-6">
+                                               <label>TC-KİMLİK NUMARANIZ <span class="required">*</span></label>
+                                               <input required="" class="form-control" placeholder="Doğru girdiyinizden emin olsun." name="passportid" id="passportid" type="number">
                                            </div>
                                            <div class="form-group col-md-6">
                                                <label>il <span class="required">*</span></label>
@@ -147,5 +157,8 @@
             //     return true;
             // });
         });
+
+
+
     </script>
 @endsection
