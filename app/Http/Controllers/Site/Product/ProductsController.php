@@ -9,6 +9,7 @@ use App\Product;
 use App\ProductImage;
 use Illuminate\Http\Request;
 use Session;
+use App\Option;
 
 class ProductsController extends Controller
 {
@@ -96,14 +97,16 @@ class ProductsController extends Controller
     // ADD TO CART
 
     public function addToCart(Request $request, $id){
-        $productdata = Product::find($id);
 
+        $product = Product::find($id);
+        $options = Option::all();
+ 
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $basket = new Basket($oldCart);
         $basket->add($product,$product->id);
 
         $request->session()->put('cart',$basket);
-        dd($request->session()->get('cart'));
+        dd($request->session()->get('cart'),$options);
         return redirect()->route('site.product');
     }
 }
