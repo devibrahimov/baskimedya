@@ -20,6 +20,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                          @for($i =0 ; $i<=1; $i++)
                             <tr>
                                 <td>
                                     <table class="table table-sm font-sm mb-0 mt-2">
@@ -89,8 +90,12 @@
                                      <a href="" class="btn btn-sm btn-outline-danger"> × Sil</a>
                                 </td>
                             </tr>
-
+                          @endfor
                             </tbody>
+
+
+
+
                             <tfoot>
                             <tr>
                                 <td colspan="3">&nbsp;</td>

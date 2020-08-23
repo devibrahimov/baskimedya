@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\CompanyInform;
 use App\Http\Controllers\Controller;
 use App\Province;
+use App\UserInform;
 use  Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use App\User ;
@@ -20,8 +22,9 @@ class UserController extends Controller
 
         $user = DB::table('users')
             ->join('user_informations' , 'users.id' , '=' ,'user_informations.user_id')
+            ->join('company_inform' , 'users.id' , '=' ,'company_inform.user_id')
             ->where('users.id','=',$id)
-            ->select('users.*','user_informations.*')
+            ->select('users.*','user_informations.*','company_inform.*')
             ->first();
      // $user = $user[0];
         $provinces = Province::all();
@@ -56,4 +59,43 @@ class UserController extends Controller
             return redirect()->back();
         }
     }
+
+
+    public function updateinform(Request $request){
+
+        $userid = $request->uid;
+        $user = User::find($userid);
+
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->email = $request->email;
+
+        $user->save();
+        $userinformid =  $request->unfid;
+        $userinform= UserInform::find($userinformid);
+        $userinform->user_province = $request->province ;
+        $userinform->user_district = $request->district ;
+       // $userinform->gsm = $request->gsm ;
+        $userinform->gsm2 = $request->gsm2 ;
+        $userinform->phone = $request->phone ;
+        $userinform->phone2 = $request->phone2 ;
+        $userinform->save();
+        return back();
+    }
+
+    public function updatecompany(Request $request){
+        $userid = $request->uid;
+
+        $CompanyInform = CompanyInform::where('user_id','=',$userid)->first();
+
+        $CompanyInform->company_name = $request->company_name ;
+        $CompanyInform->address1 = $request->address1 ;
+        $CompanyInform->address2 = $request->address2 ;
+        $CompanyInform->postcode = $request->postcode ;
+        $CompanyInform->vergino = $request->vergino ;
+        $CompanyInform->vergidairesi = $request->vergidairesi ;
+        $CompanyInform->save();
+
+        return 'OK';
+        }
 }
