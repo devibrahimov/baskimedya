@@ -124,7 +124,8 @@
                                 <tr>
                                     <th scope="row">
                                         <div class="custome-checkbox" name="myForm">
-                                            <input class="form-radio-input" type="radio" name="radios"
+
+                                            <input class="form-radio-input option" type="radio" name="radios"
                                                    data-option="{{$option->id}}"
                                                    @if($loop->first) {{'checked'}} @endif data-optionprice="{{$option->price}}"
                                                    id="exampleRadio3" value="{{$option->id}}">
@@ -140,32 +141,33 @@
                         </table>
 
                     </div>
-                    <div class="col-lg-6">
+                    <div class="otherOptions col-lg-6">
 
-                        <div id="dimensions" class="card shadow-sm mb-4">
+                        <div id="dimensions" class="card shadow-sm mb-4 ">
                             <div class="card-header bg_default text-white">
                                 <h6 class="mb-0 font-weight-bold text-white">Ölçüler</h6>
                             </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group mb-0">
+                            <div class="card-body ">
+                                <div class="row ">
+                                    <div class="col-6 ">
+                                        <div class="form-group mb-0 metreKare">
                                             <label for="width" class="sr-only ">En</label>
                                             <div class="input-group input-group-sm">
                                                 <div class="input-group-prepend">
                                                     <span
                                                         class="input-group-text bg_default text-white font-weight-bold">EN</span>
                                                 </div>
-                                                <input type="number" min="1" step="1" id="width" name="width"
-                                                       value="100" class="form-control">
+                                                <input class="form-control vinilWidth" type="number" min="1" step="1"
+                                                       id="width" name="width"
+                                                       value="100">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg_default text-white ">sm</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="form-group mb-0">
+                                    <div class="col-6 ">
+                                        <div class="form-group mb-0 metreKare">
                                             <label for="height" class="sr-only">Boy</label>
                                             <div class="input-group input-group-sm">
                                                 <div class="input-group-prepend">
@@ -173,7 +175,7 @@
                                                         class="input-group-text font-weight-bold bg_default text-white ">BOY</span>
                                                 </div>
                                                 <input type="number" min="1" step="1" id="height" name="height"
-                                                       value="100" class="form-control">
+                                                       value="100" class="form-control vinilHeight">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text bg_default text-white ">sm</span>
                                                 </div>
@@ -213,13 +215,13 @@
                             <p>Ek Seçenekler</p>
                             @foreach( $product->additionaloptionsparent($product->additional_options) as $options)
                                 @foreach($options as $key => $option)
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3 secenekler">
                                         <div class="input-group-prepend">
                                             <label class="input-group-text bg_default text-white "
                                                    for="inputGroupSelect01">{{$option->name}}</label>
                                         </div>
 
-                                        <select class="custom-select" id="inputGroupSelect01" type="secenek">
+                                        <select class="custom-select secenek" id="inputGroupSelect01" type="secenek">
                                             <option value="0"> -----</option>
                                             @foreach($product->additionaloption($option->id)  as $opt)
                                                 <option name="veri" value="{{$opt->id}}">{{$opt->name}}</option>
@@ -241,9 +243,9 @@
                                 </div>
                             </div>
 
-                            <div class="cart_btn" href="{{route('site.addToCart',['id'=>$product->id])}}">
-                                <a href="{{route('site.addToCart',['id'=>$product->id])}}">
-                                    <button class="btn btn-fill-out btn-addtocart" type="submit"><i
+                            <div class="cart_btn">
+                                <a>
+                                    <button class="btn btn-fill-out btn-addtocart" type="submit" id="addBasket"><i
                                             class="icon-basket-loaded"></i> Sepete Ekle
                                     </button>
                                 </a>
@@ -269,33 +271,18 @@
     <script>
 
         // URUN MALZEMELESİ
+        //
+        // // en boy product->id
+        //
 
-        $('input[type="radio"]').on('change', function (e) {
-            var o = $("option:selected",this);
-            var prices = this.dataset.optionprice;
-             console.log(prices)
-           // Object.freeze(prices);
-        });
+        //
+        // $('input[name="height"]').on('input change', function (e) {
+        //     var boy = e.target.value;
+        //     console.log("BOY: ", boy)
+        //     return boy;
+        // });
 
-        // en boy
 
-        $('input[name="width"]').on('change', function (e) {
-            var en = e.target.value;
-            console.log("EN: ", en)
-            return en;
-        });
-
-        $('input[name="height"]').on('change', function (e) {
-            var boy = e.target.value;
-            console.log("BOY: ", boy)
-            return boy;
-        });
-
-        // SECENEKLER
-        $('select[type="secenek"]').on('change', function (e) {
-            var sad = e.target.value;
-            console.log("SECENEKLER: ", sad)
-        });
 
         //
         // $('#inputGroupSelect01').change(function (e) {
@@ -303,12 +290,45 @@
         //     //alert($(this).val());
         //     console.log("Baski: ", baski)
         // });
-
         // ADET
-        $('input[name="quantity"]').on('click', function (e) {
-            var adet = e.target.value;
-            console.log("adet: ", adet)
-            Object.freeze(adet);
+        // $('.quantity').on('click', function (e) {
+        //     var adet = e.target;
+        //     console.log("adet: ", adet)
+        // });
+
+
+
+        $('#addBasket').on('click', function () {
+           // var provinceid = $(this).find(":selected").val();
+            var optionprice = ($('.option:checked')[0].dataset.optionprice)
+
+
+            var vinilWidth = $('.vinilWidth').on('input change')[0].value
+            var vinilHeight = $('.vinilHeight').on('input change')[0].value
+            var squareMeter = vinilWidth * vinilHeight;
+            //console.log(optionprice,vinilHeight,vinilWidth)
+
+//            SECENEKLER
+           // console.log($('.secenek').length)
+
+            for(var i = 0; i<$('.secenek').length;i++){
+               var options = $('.secenek').on('change')[i].value
+                console.log($('.secenek').on('change')[i].value)
+            }
+
+            $.ajax({ /* AJAX REQUEST */
+                type: 'post',
+                url: "{{route('product.addtocart')}}",
+                data: {
+                    'optionprice': optionprice,
+                    'vinilHeight': $('.vinilHeight').on('input change')[0].value,
+                    'vinilWidth': $('.vinilWidth').on('input change')[0].value,
+                    "_token": "{{ csrf_token() }}"
+                },
+                success: function (data) {
+                    $('#districts').html(data);
+                }
+            });
         });
 
     </script>
