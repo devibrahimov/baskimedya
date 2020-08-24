@@ -280,15 +280,16 @@
             for (var i = 0; i < $('.additionaloption').length; i++) {
                 additionaloption.push($('.additionaloption')[i].value)
             }
-            console.log(additionaloption)
+           // console.log(additionaloption)
 
             $.ajax({ /* AJAX REQUEST */
                 type: 'post',
                 url: "{{route('product.addtocart')}}",
                 data: {
                     'user_id':{{\Illuminate\Support\Facades\Auth::user()->id}},
+                    'product_id' : {{$product->id}},
                     'optionid':optionid,
-                    'option':options,
+                    'additionaloptions':additionaloption,
                     'vinilHeight': vinilHeight,
                     'vinilWidth': vinilWidth,
                     'qty':qty,

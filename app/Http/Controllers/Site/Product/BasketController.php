@@ -17,11 +17,25 @@ class BasketController extends Controller
 
     public function addtocart(Request $request){
 
-        $optionid = 1;
-        $vinilWidth = 100;
-        $vinilHeight= 100;
+        $optionid = $request->optionid;
+        $additionaloptions = $request->additionaloptions;
         $user_id = $request->user_id ;
-        $product_id = 3 ;
+        $product_id = $request->product_id ;
+
+
+        $vinilWidth = $request->vinilWidth;
+        $vinilHeight= $request->vinilHeight;
+        $qty = $request->qty;
+
+
+        $option =  Option::find($optionid);
+
+
+
+
+
+        
+
 
         #create basket==================
         $basket = new Basket() ;
@@ -31,13 +45,9 @@ class BasketController extends Controller
         #get basket id
         #end basket=====================
 
-        $option =  Option::find($optionid);
 
-        $items =[
-
-        ];
-
-        Basket::add($items,$basket_lastid);
+      //  $items =[ ];
+        //Basket()->add($items,$basket_lastid);
 
 
 
