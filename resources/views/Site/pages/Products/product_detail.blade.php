@@ -270,63 +270,37 @@
 @section('js')
     <script>
 
-        // URUN MALZEMELESİ
-        //
-        // // en boy product->id
-        //
-
-        //
-        // $('input[name="height"]').on('input change', function (e) {
-        //     var boy = e.target.value;
-        //     console.log("BOY: ", boy)
-        //     return boy;
-        // });
-
-
-
-        //
-        // $('#inputGroupSelect01').change(function (e) {
-        //     var baski = e.target.value;
-        //     //alert($(this).val());
-        //     console.log("Baski: ", baski)
-        // });
-        // ADET
-        // $('.quantity').on('click', function (e) {
-        //     var adet = e.target;
-        //     console.log("adet: ", adet)
-        // });
-
-
-
         $('#addBasket').on('click', function () {
-           // var provinceid = $(this).find(":selected").val();
+            // var provinceid = $(this).find(":selected").val();
             var optionprice = ($('.option:checked')[0].dataset.optionprice)
 
 
-            var vinilWidth = $('.vinilWidth').on('input change')[0].value
-            var vinilHeight = $('.vinilHeight').on('input change')[0].value
+            var vinilWidth = $('.vinilWidth').val()
+            var vinilHeight = $('.vinilHeight').val()
             var squareMeter = vinilWidth * vinilHeight;
             //console.log(optionprice,vinilHeight,vinilWidth)
 
 //            SECENEKLER
-           // console.log($('.secenek').length)
-           //
-           //  for(var i = 0; i<$('.secenek').length;i++){
-           //     var options = $('.secenek').on('change')[i].value
-           //      console.log($('.secenek').on('change')[i].value)
-           //  }
+            // console.log($('.secenek').length)
+            //
+            for (var i = 0; i < $('.secenek').length; i++) {
+                var options = $('.secenek').val()
+            }
+
+            //console.log(optionpr ice, vinilWidth, vinilHeight, options)
 
             $.ajax({ /* AJAX REQUEST */
                 type: 'post',
                 url: "{{route('product.addtocart')}}",
                 data: {
+                    'option':options,
                     'optionprice': optionprice,
-                    'vinilHeight': 1,
-                    'vinilWidth': 2,
+                    'vinilHeight': vinilHeight,
+                    'vinilWidth': vinilWidth,
                     "_token": "{{ csrf_token() }}"
                 },
                 success: function (data) {
-                    return true;
+                    return this.data
                 }
             });
         });
