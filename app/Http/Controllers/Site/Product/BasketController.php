@@ -7,5 +7,9 @@ use Illuminate\Http\Request;
 
 class BasketController extends Controller
 {
-    //
+    public function addtocart(Request $request)
+    {
+
+   }
+
 }

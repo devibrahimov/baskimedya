@@ -238,7 +238,7 @@
                             <div class="cart-product-quantity">
                                 <div class="quantity">
                                     <input type="button" value="-" class="minus">
-                                    <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+                                    <input type="number" name="quantity" value="1" title="Qty" class="qty" size="4">
                                     <input type="button" value="+" class="plus">
                                 </div>
                             </div>
@@ -270,63 +270,31 @@
 @section('js')
     <script>
 
-        // URUN MALZEMELESİ
-        //
-        // // en boy product->id
-        //
-
-        //
-        // $('input[name="height"]').on('input change', function (e) {
-        //     var boy = e.target.value;
-        //     console.log("BOY: ", boy)
-        //     return boy;
-        // });
-
-
-
-        //
-        // $('#inputGroupSelect01').change(function (e) {
-        //     var baski = e.target.value;
-        //     //alert($(this).val());
-        //     console.log("Baski: ", baski)
-        // });
-        // ADET
-        // $('.quantity').on('click', function (e) {
-        //     var adet = e.target;
-        //     console.log("adet: ", adet)
-        // });
-
-
-
         $('#addBasket').on('click', function () {
-           // var provinceid = $(this).find(":selected").val();
-            var optionprice = ($('.option:checked')[0].dataset.optionprice)
+            var optionID = ($('.option:checked')[0].dataset.option)
+            var vinilWidth = $('.vinilWidth').val()
+            var vinilHeight = $('.vinilHeight').val()
+            var qty = $('.qty').val()
+            var options = new Array()
 
-
-            var vinilWidth = $('.vinilWidth').on('input change')[0].value
-            var vinilHeight = $('.vinilHeight').on('input change')[0].value
-            var squareMeter = vinilWidth * vinilHeight;
-            //console.log(optionprice,vinilHeight,vinilWidth)
-
-//            SECENEKLER
-           // console.log($('.secenek').length)
-
-            for(var i = 0; i<$('.secenek').length;i++){
-               var options = $('.secenek').on('change')[i].value
-                console.log($('.secenek').on('change')[i].value)
+            for (var i = 0; i < $('.secenek').length; i++) {
+                options.push($('.secenek')[i].value);
             }
 
             $.ajax({ /* AJAX REQUEST */
                 type: 'post',
                 url: "{{route('product.addtocart')}}",
                 data: {
-                    'optionprice': optionprice,
-                    'vinilHeight': $('.vinilHeight').on('input change')[0].value,
-                    'vinilWidth': $('.vinilWidth').on('input change')[0].value,
+                    'user_id':{{\Illuminate\Support\Facades\Auth::user()->id}},
+                    'option': options,
+                    'optionid': optionID,
+                    'height': vinilHeight,
+                    'width': vinilWidth,
+                    'qty':qty,
                     "_token": "{{ csrf_token() }}"
                 },
                 success: function (data) {
-                    $('#districts').html(data);
+                    return data
                 }
             });
         });
