@@ -269,20 +269,13 @@
 
 @section('js')
     <script>
-
         $('#addBasket').on('click', function () {
             // var provinceid = $(this).find(":selected").val();
             var optionprice = ($('.option:checked')[0].dataset.optionprice)
-
-
             var vinilWidth = $('.vinilWidth').val()
             var vinilHeight = $('.vinilHeight').val()
             var squareMeter = vinilWidth * vinilHeight;
-            //console.log(optionprice,vinilHeight,vinilWidth)
 
-//            SECENEKLER
-            // console.log($('.secenek').length)
-            //
             for (var i = 0; i < $('.secenek').length; i++) {
                 var options = $('.secenek').val()
             }
