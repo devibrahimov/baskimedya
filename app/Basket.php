@@ -15,14 +15,14 @@ class Basket extends Model
     public $totalPrice = 0;
 
 
-    public function __construct($oldCart)
-    {
-        if ($oldCart) {
-            $this->items = $oldCart->items;
-            $this->totalQuantity = $oldCart->totalQuantity;
-            $this->totalPrice = $oldCart->totalPrice;
-        }
-    }
+//    public function __construct($oldCart)
+//    {
+//        if ($oldCart) {
+//            $this->items = $oldCart->items;
+//            $this->totalQuantity = $oldCart->totalQuantity;
+//            $this->totalPrice = $oldCart->totalPrice;
+//        }
+//    }
 
     public function add($item, $id)
     {

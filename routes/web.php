@@ -78,10 +78,6 @@ Route::get('/galeri', 'Site\GalleryController@index')->name('site.gallery');
 Route::get('/hizmetlerimiz', 'Site\ServicesController@index')->name('site.services');
 Route::get('/bilgilendirme', 'Site\SiteController@information')->name('site.information');
 
-//    ADD TO CART
-Route::get('add-to-cart/{id}', 'Site\Product\ProductsController@addToCart')->name('site.addToCart');
-
-
 Route::group(['prefix' => 'kullanici'], function () {
 
     Route::get('/giris', 'Site\LoginController@index')->name('site.login');
@@ -94,8 +90,9 @@ Route::group(['prefix' => 'kullanici'], function () {
 
     //auth
     Route::get('/sepet', 'Site\Product\BasketController@index');
-    Route::post('/sepet','Site\Product\BasketController@addtocart')->name('product.addtocart');
 
+
+        Route::post('/sepet','Site\Product\BasketController@addtocart')->name('product.addtocart');
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/{slug}/{id}', 'Site\UserController@index')->name('user.profil');
         Route::post('/changepassword', 'Site\UserController@changepassword')->name('password.change');
