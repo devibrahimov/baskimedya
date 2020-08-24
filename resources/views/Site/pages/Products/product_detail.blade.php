@@ -310,23 +310,23 @@
 
 //            SECENEKLER
            // console.log($('.secenek').length)
-
-            for(var i = 0; i<$('.secenek').length;i++){
-               var options = $('.secenek').on('change')[i].value
-                console.log($('.secenek').on('change')[i].value)
-            }
+           //
+           //  for(var i = 0; i<$('.secenek').length;i++){
+           //     var options = $('.secenek').on('change')[i].value
+           //      console.log($('.secenek').on('change')[i].value)
+           //  }
 
             $.ajax({ /* AJAX REQUEST */
                 type: 'post',
                 url: "{{route('product.addtocart')}}",
                 data: {
                     'optionprice': optionprice,
-                    'vinilHeight': $('.vinilHeight').on('input change')[0].value,
-                    'vinilWidth': $('.vinilWidth').on('input change')[0].value,
+                    'vinilHeight': 1,
+                    'vinilWidth': 2,
                     "_token": "{{ csrf_token() }}"
                 },
                 success: function (data) {
-                    $('#districts').html(data);
+                    return true;
                 }
             });
         });
