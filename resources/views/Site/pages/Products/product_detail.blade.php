@@ -238,7 +238,7 @@
                             <div class="cart-product-quantity">
                                 <div class="quantity">
                                     <input type="button" value="-" class="minus">
-                                    <input type="number" name="quantity" value="1" title="Qty" class="qty" size="4">
+                                    <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
                                     <input type="button" value="+" class="plus">
                                 </div>
                             </div>
@@ -271,30 +271,36 @@
     <script>
 
         $('#addBasket').on('click', function () {
-            var optionID = ($('.option:checked')[0].dataset.option)
+            // var provinceid = $(this).find(":selected").val();
+            var optionprice = ($('.option:checked')[0].dataset.optionprice)
+
+
             var vinilWidth = $('.vinilWidth').val()
             var vinilHeight = $('.vinilHeight').val()
-            var qty = $('.qty').val()
-            var options = new Array()
+            var squareMeter = vinilWidth * vinilHeight;
+            //console.log(optionprice,vinilHeight,vinilWidth)
 
+//            SECENEKLER
+            // console.log($('.secenek').length)
+            //
             for (var i = 0; i < $('.secenek').length; i++) {
-                options.push($('.secenek')[i].value);
+                var options = $('.secenek').val()
             }
+
+            //console.log(optionpr ice, vinilWidth, vinilHeight, options)
 
             $.ajax({ /* AJAX REQUEST */
                 type: 'post',
                 url: "{{route('product.addtocart')}}",
                 data: {
-                    'user_id':{{\Illuminate\Support\Facades\Auth::user()->id}},
-                    'option': options,
-                    'optionid': optionID,
-                    'height': vinilHeight,
-                    'width': vinilWidth,
-                    'qty':qty,
+                    'option':options,
+                    'optionprice': optionprice,
+                    'vinilHeight': vinilHeight,
+                    'vinilWidth': vinilWidth,
                     "_token": "{{ csrf_token() }}"
                 },
                 success: function (data) {
-                    return data
+                    return this.data
                 }
             });
         });
