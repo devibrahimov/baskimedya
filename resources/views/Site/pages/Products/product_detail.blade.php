@@ -269,6 +269,7 @@
 
 @section('js')
     <script>
+        var AuthUser = "{{{ (Auth::user()) ? Auth::user()->id : null }}}";
         $('#addBasket').on('click', function () {
             var optionid = ($('.option:checked')[0].dataset.option)
             var vinilWidth = $('.vinilWidth').val()
@@ -281,24 +282,31 @@
                 additionaloption.push($('.additionaloption')[i].value)
             }
            // console.log(additionaloption)
+            var loggedIn = {{{(Auth::user())? 'true' : 'false' }}} ;
+            if (!loggedIn){
+                alert('Sebete Ekleye bilmeniz için Kullanıcı olarak giriş yapmanız gerekmektedir');
+            }else{
+                $.ajax({ /* AJAX REQUEST */
+                    type: 'post',
+                    url: "{{route('product.addtocart')}}",
+                    data: {
+                        'user_id':AuthUser,
+                        'product_id' : {{$product->id}},
+                        'optionid':optionid,
+                        'additionaloptions':additionaloption,
+                        'height': vinilHeight,
+                        'width': vinilWidth,
+                        'qty':qty,
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function (data) {
+                        return this.data
+                    }
+                });
+            }
 
-            $.ajax({ /* AJAX REQUEST */
-                type: 'post',
-                url: "{{route('product.addtocart')}}",
-                data: {
-                    'user_id':{{\Illuminate\Support\Facades\Auth::user()->id}},
-                    'product_id' : {{$product->id}},
-                    'optionid':optionid,
-                    'additionaloptions':additionaloption,
-                    'vinilHeight': vinilHeight,
-                    'vinilWidth': vinilWidth,
-                    'qty':qty,
-                    "_token": "{{ csrf_token() }}"
-                },
-                success: function (data) {
-                    return this.data
-                }
-            });
+
+
         });
 
     </script>
