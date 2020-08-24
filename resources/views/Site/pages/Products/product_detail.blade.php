@@ -270,26 +270,28 @@
 @section('js')
     <script>
         $('#addBasket').on('click', function () {
-            // var provinceid = $(this).find(":selected").val();
-            var optionprice = ($('.option:checked')[0].dataset.optionprice)
+            var optionid = ($('.option:checked')[0].dataset.option)
             var vinilWidth = $('.vinilWidth').val()
             var vinilHeight = $('.vinilHeight').val()
-            var squareMeter = vinilWidth * vinilHeight;
+            var qty = $('.qty').val()
+            console.log(qty)
 
+            var options = new Array()
             for (var i = 0; i < $('.secenek').length; i++) {
-                var options = $('.secenek').val()
+                options.push($('.secenek')[i].value)
             }
-
-            //console.log(optionpr ice, vinilWidth, vinilHeight, options)
+            console.log(options)
 
             $.ajax({ /* AJAX REQUEST */
                 type: 'post',
                 url: "{{route('product.addtocart')}}",
                 data: {
+                    'user_id':{{\Illuminate\Support\Facades\Auth::user()->id}},
+                    'optionid':optionid,
                     'option':options,
-                    'optionprice': optionprice,
                     'vinilHeight': vinilHeight,
                     'vinilWidth': vinilWidth,
+                    'qty':qty,
                     "_token": "{{ csrf_token() }}"
                 },
                 success: function (data) {
