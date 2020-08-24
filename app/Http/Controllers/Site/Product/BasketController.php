@@ -18,8 +18,8 @@ class BasketController extends Controller
     public function addtocart(Request $request){
 
         $optionid = 1;
-        $width = 100;
-        $height = 100;
+        $vinilWidth = 100;
+        $vinilHeight= 100;
         $user_id = $request->user_id ;
         $product_id = 3 ;
 

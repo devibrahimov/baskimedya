@@ -215,13 +215,13 @@
                             <p>Ek Seçenekler</p>
                             @foreach( $product->additionaloptionsparent($product->additional_options) as $options)
                                 @foreach($options as $key => $option)
-                                    <div class="input-group mb-3 secenekler">
+                                    <div class="input-group mb-3 additionaloptions">
                                         <div class="input-group-prepend">
                                             <label class="input-group-text bg_default text-white "
                                                    for="inputGroupSelect01">{{$option->name}}</label>
                                         </div>
 
-                                        <select class="custom-select secenek" id="inputGroupSelect01" type="secenek">
+                                        <select class="custom-select additionaloption" id="inputGroupSelect01"  >
                                             <option value="0"> -----</option>
                                             @foreach($product->additionaloption($option->id)  as $opt)
                                                 <option name="veri" value="{{$opt->id}}">{{$opt->name}}</option>
@@ -274,13 +274,13 @@
             var vinilWidth = $('.vinilWidth').val()
             var vinilHeight = $('.vinilHeight').val()
             var qty = $('.qty').val()
-            console.log(qty)
+        //    console.log(qty)
 
-            var options = new Array()
-            for (var i = 0; i < $('.secenek').length; i++) {
-                options.push($('.secenek')[i].value)
+            var additionaloption = new Array()
+            for (var i = 0; i < $('.additionaloption').length; i++) {
+                additionaloption.push($('.additionaloption')[i].value)
             }
-            console.log(options)
+            console.log(additionaloption)
 
             $.ajax({ /* AJAX REQUEST */
                 type: 'post',
