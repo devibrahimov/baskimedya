@@ -85,18 +85,18 @@
 
                                         </ul>
                                         <hr/>
-                                        <div class="product_share">
-                                            <span>Paylaş:</span>
-                                            <ul class="social_icons">
-                                                <li><a href="#"><i class="ion-social-facebook text-info"> </i> facebook
-                                                    </a></li>
-                                            </ul>
-                                            <ul class="product-meta d-inline">
-                                                <li class="text-default">Ürün Sipariş Kodu : <a
-                                                        href="{{route('showProducts',[$product->id,$product->slug])}}"> {{$product->product_code}}</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+{{--                                        <div class="product_share">--}}
+{{--                                            <span>Paylaş:</span>--}}
+{{--                                            <ul class="social_icons">--}}
+{{--                                                <li><a href="#"><i class="ion-social-facebook text-info"> </i> facebook--}}
+{{--                                                    </a></li>--}}
+{{--                                            </ul>--}}
+{{--                                            <ul class="product-meta d-inline">--}}
+{{--                                                <li class="text-default">Ürün Sipariş Kodu : <a--}}
+{{--                                                        href="{{route('showProducts',[$product->id,$product->slug])}}"> {{$product->product_code}}</a>--}}
+{{--                                                </li>--}}
+{{--                                            </ul>--}}
+{{--                                        </div>--}}
                                     </div>
                                 </div>
 
@@ -106,7 +106,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row allContent">
                     <div class="col-lg-6">
                         {{--                        <p>Seçenekler</p>--}}
 
@@ -147,7 +147,7 @@
                             <div class="card-header bg_default text-white">
                                 <h6 class="mb-0 font-weight-bold text-white">Ölçüler</h6>
                             </div>
-                            <div class="card-body ">
+                            <div class="card-body hesaplama">
                                 <div class="row ">
                                     <div class="col-6 ">
                                         <div class="form-group mb-0 metreKare">
@@ -209,36 +209,51 @@
                         </div>
 
                         <hr>
+                        {{{$say = 0}}}
 
-
-                        @if($product->additional_options != NULL)
+                    @if($product->additional_options != NULL)
                             <p>Ek Seçenekler</p>
                             @foreach( $product->additionaloptionsparent($product->additional_options) as $options)
-                                @foreach($options as $key => $option)
-                                    <div class="input-group mb-3 additionaloptions">
+                                   @foreach($options as $key => $option)
+                                    <div class="input-group mb-3 additionaloptions" data-id="{{$option->id}}">
                                         <div class="input-group-prepend">
                                             <label class="input-group-text bg_default text-white "
                                                    for="inputGroupSelect01">{{$option->name}}</label>
                                         </div>
 
-                                        <select class="custom-select additionaloption" id="inputGroupSelect01"  >
-                                            <option value="0"> -----</option>
+                                        <select class="custom-select additionaloption" id="inputGroupSelect0{{$say}}">
+                                            <option value="0" > -----</option>
                                             @foreach($product->additionaloption($option->id)  as $opt)
-                                                <option name="veri" value="{{$opt->id}}">{{$opt->name}}</option>
+                                                <option class="veri"  value="{{$opt->id}}" data-price="{{$opt->price}}">{{$opt->name}}</option>
                                             @endforeach
                                         </select>
 
                                     </div>
+                                                       {{{$say++}}}
                                 @endforeach
                             @endforeach
                         @endif
 
 
+                        <div class="last-infos">
+                            <ul class="product-meta d-inline">
+                                <li class="text-default">Ürün Sipariş Kodu : <a
+                                        href="{{route('showProducts',[$product->id,$product->slug])}}"> {{$product->product_code}}</a>
+                                </li>
+
+                            </ul>
+                            <ul class="product-meta d-inline">
+                                <li class="text-default">Toplam Tutar :
+                                    <a class="tutar">100</a>
+                                </li>
+                            </ul>
+                        </div>
+
                         <div class="cart_extra mt-2">
                             <div class="cart-product-quantity">
                                 <div class="quantity">
                                     <input type="button" value="-" class="minus">
-                                    <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+                                    <input type="number" name="quantity" value="1" title="Qty" class="qty" size="4">
                                     <input type="button" value="+" class="plus">
                                 </div>
                             </div>
@@ -269,12 +284,121 @@
 
 @section('js')
     <script>
+        $(function () {
+
+            $('.allContent').on('change',function (){
+                var malzemePrice = Number(($('.option:checked')[0].dataset.optionprice))
+                var width = Number($('.vinilWidth').val())
+                var height = Number($('.vinilHeight').val())
+                var squaremeter = width * height;
+                var qty = $('.qty').val()
+
+                 var say =0 ;
+                // for(var i = 0 ; i < $('.additionaloption ').length ; i++){
+                //     var idname = '#inputGroupSelect0'+say+'  option:selected'
+                //     idname = idname;
+                //     console.log($(idname))
+
+                // }
+
+                AlerVal($('#inputGroupSelect01 option:selected'))
+                function AlerVal(e){
+                    // var a =e(0);
+                    console.log($(e).dataset);
+                }
+                say++
+
+                // var a;
+
+                        $('#calc-w').text(width);
+                        $('#calc-h').text(height);
+                        $('#calc-area').text(squaremeter);
+//////////////////////////////////////////////////////////////////////
+//                 var additionaloption = new Array($('.additionaloptions').length).length
+//                 console.log(additionaloption)
+//
+//                 for (var i = 0; i < $('.additionaloptions').length; i++) {
+//
+//                   //   a = $('.veri')[i].dataset.price
+//                     var parentoption = $('.additionaloptions')[i].dataset.id
+//
+//                     var child = new Array()
+//
+//                     for (var v = 0; v < $('.veri:selected').length; v++) {
+//                         child.push( $('.additionaloption')[i] )
+//                     }
+//
+//                      // console.log(a)
+//                     // if($('.veri')[i].dataset.price === null){
+//                     //     console.log("bu değer null")
+//                     // }else{
+//                   // additionaloption.push($('.veri')[i].dataset.price)
+//                     // }
+//                     console.log(child)
+//                     console.log()
+//                 }
+
+                //var dynamicElement = $('.additionaloptions').html()
+               // console.log(squaremeter,malzemePrice,qty,additionaloption)
+               //      var tutar = ((squaremeter * ( Number(malzemePrice) + (Number(additionaloption[0])) )) * 0.18);
+               //      $('.tutar').text(tutar);
+            });
+
+        {{--    $('.hesaplama').on('input', function (e) {--}}
+        {{--        var width = $('#width').val();--}}
+        {{--        var height = $('#height').val();--}}
+        {{--        $('#calc-w').text(width);--}}
+        {{--        $('#calc-h').text(height);--}}
+        {{--        squaremeter = width * height;--}}
+        {{--        $('#calc-area').text(squaremeter);--}}
+        {{--    });--}}
+
+        {{--    $('.qty').on('input', function (e) {--}}
+        {{--       adet = e.target.value--}}
+        {{--    });--}}
+
+        {{--    $('.minus').on('click', function (e) {--}}
+        {{--        $('.qty').on('change')[0].value--}}
+        {{--    });--}}
+
+        {{--    $('.plus').on('click', function (e) {--}}
+        {{--        $('.qty').on('change')[0].value--}}
+        {{--    });--}}
+
+        {{--    $('.option').on('change', function (e) {--}}
+        {{--        var malzemePrice = e.target.dataset.optionprice;--}}
+        {{--    });--}}
+
+        {{--    $('.additionaloptions').on('change',function (e){--}}
+        {{--        var additonalPrice = e.target.value--}}
+        {{--    })--}}
+        {{--    $.ajax({ /* AJAX REQUEST */--}}
+        {{--        type: 'get',--}}
+        {{--        url: "{{route('product.addtocart')}}",--}}
+        {{--        dataType:'int',--}}
+        {{--        success: function (data) {--}}
+        {{--            console.log(data)--}}
+        {{--        //    var tutar = this.squaremeter * (this.malzemePrice)--}}
+        {{--      //      console.log(tutar)--}}
+        {{--          //  return tutar--}}
+        {{--        }--}}
+        {{--    });--}}
+
+        {{--    //$('.tutar').text(tutar);--}}
+
+
+        });
+
+
+        //--------------------------------------------
+
+
         $('#addBasket').on('click', function () {
             var optionid = ($('.option:checked')[0].dataset.option)
             var vinilWidth = $('.vinilWidth').val()
             var vinilHeight = $('.vinilHeight').val()
             var qty = $('.qty').val()
-        //    console.log(qty)
+            //    console.log(qty)
 
             var additionaloption = new Array()
             for (var i = 0; i < $('.additionaloption').length; i++) {
@@ -287,11 +411,11 @@
                 url: "{{route('product.addtocart')}}",
                 data: {
                     'user_id':{{\Illuminate\Support\Facades\Auth::user()->id}},
-                    'optionid':optionid,
-                    'option':options,
+                    'optionid': optionid,
+                    'option': options,
                     'vinilHeight': vinilHeight,
                     'vinilWidth': vinilWidth,
-                    'qty':qty,
+                    'qty': qty,
                     "_token": "{{ csrf_token() }}"
                 },
                 success: function (data) {
